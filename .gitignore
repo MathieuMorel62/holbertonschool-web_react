@@ -1,0 +1,15 @@
+# packages
+package.json
+package-lock.json
+
+# config files
+tsconfig.json
+
+# linter
+.eslintrc.js
+
+# webpack
+webpack.config.js
+
+# node
+node_modules
