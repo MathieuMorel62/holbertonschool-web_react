@@ -58,9 +58,20 @@ export function executeWork(employee: DirectorInterface | TeacherInterface): str
   }
 }
 
+export type Subjects = 'Math' | 'History';
+
+export function teachClass(todayClass: Subjects): string {
+  if (todayClass === 'Math') {
+    return 'Teaching Math';
+  } else if (todayClass === 'History') {
+    return 'Teaching History';
+  }
+}
+
 
 // Testing createEmployee function
 console.log('\n');
+console.log('Testing createEmployee function:');
 console.log(createEmployee(200));
 console.log(createEmployee(1000));
 console.log(createEmployee('$500'));
@@ -71,6 +82,7 @@ console.log(createEmployee('$800,50'));
 console.log('\n');
 
 // Testing isDirector function
+console.log('Testing isDirector function:');
 console.log(executeWork(createEmployee(200)));
 console.log(executeWork(createEmployee(1000)));
 console.log(executeWork(createEmployee('$500')));
@@ -78,4 +90,10 @@ console.log(executeWork(createEmployee('$100')));
 console.log(executeWork(createEmployee('$800')));
 console.log(executeWork(createEmployee('$80,50')));
 console.log(executeWork(createEmployee('$800,50')));
+console.log('\n');
+
+// Testing teachClass function
+console.log('Testing teachClass function:');
+console.log(teachClass('Math'));
+console.log(teachClass('History'));
 console.log('\n');
