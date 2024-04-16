@@ -46,7 +46,21 @@ export function createEmployee(salary: number | string): DirectorInterface | Tea
   }
 }
 
-// Testing
+export function isDirector(employee: DirectorInterface | TeacherInterface): employee is DirectorInterface {
+  return (employee as DirectorInterface).workDirectorTasks !== undefined;
+}
+
+export function executeWork(employee: DirectorInterface | TeacherInterface): string {
+  if (isDirector(employee)) {
+    return employee.workDirectorTasks();
+  } else {
+    return employee.workTeacherTasks();
+  }
+}
+
+
+// Testing createEmployee function
+console.log('\n');
 console.log(createEmployee(200));
 console.log(createEmployee(1000));
 console.log(createEmployee('$500'));
@@ -54,3 +68,14 @@ console.log(createEmployee('$100'));
 console.log(createEmployee('$800'));
 console.log(createEmployee('$80,50'));
 console.log(createEmployee('$800,50'));
+console.log('\n');
+
+// Testing isDirector function
+console.log(executeWork(createEmployee(200)));
+console.log(executeWork(createEmployee(1000)));
+console.log(executeWork(createEmployee('$500')));
+console.log(executeWork(createEmployee('$100')));
+console.log(executeWork(createEmployee('$800')));
+console.log(executeWork(createEmployee('$80,50')));
+console.log(executeWork(createEmployee('$800,50')));
+console.log('\n');
