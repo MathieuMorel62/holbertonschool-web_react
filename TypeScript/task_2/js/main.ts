@@ -68,7 +68,6 @@ export function teachClass(todayClass: Subjects): string {
   }
 }
 
-
 // Testing createEmployee function
 console.log('\n');
 console.log('Testing createEmployee function:');
