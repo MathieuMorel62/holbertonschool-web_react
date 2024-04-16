@@ -1,5 +1,3 @@
-/// <reference path="interface.ts" />
-
 import { RowID, RowElement } from './interface';
 
 export declare function insertRow(row: RowElement): number;
