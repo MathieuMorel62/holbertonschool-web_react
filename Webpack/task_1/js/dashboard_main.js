@@ -8,9 +8,10 @@ $(document).ready(function() {
   $('body').append("<p id='count'></p>");
   $('body').append('<p>Copyright - Holberton School</p>');
 
+  let count = 0;
   function updateCounter() {
-    const count = parseInt($('#count').text()) || 0;
-    $('#count').text(`${++count} clicks on the button`);
+    count += 1;
+    $('#count').text(`${count} clicks on the button`);
   }
 
   $('button').on('click', _.debounce(updateCounter, 500));
