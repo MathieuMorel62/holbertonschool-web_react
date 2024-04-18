@@ -8,10 +8,11 @@ $(document).ready(function() {
   $('body').append("<p id='count'></p>");
   $('body').append('<p>Copyright - Holberton School</p>');
 
+  let count = 0;
   function updateCounter() {
-    const count = parseInt($('#count').text()) || 0;
-    $('#count').text(`${++count} clicks on the button`);
+    count++;
+    $('#count').text(`${count} clicks on the button`);
   }
 
-  $('startButton').on('click', _.debounce(updateCounter, 500));
+  $('startButton').on('click', debounce(updateCounter, 500));
 });
