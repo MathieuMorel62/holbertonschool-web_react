@@ -1,5 +1,7 @@
 # <p align="center">TypeScript</p>
 
+![typescript](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/156d644d-5376-46c5-bb35-702a451e527a)
+t
 ## 📝 Description
 
 The TypeScript project is designed to demonstrate TypeScript's advanced capabilities in type management and interface structuring. This project consists of several tasks that guide the user through different techniques to strengthen type security within a TypeScript application, including the creation of classes, the implementation of interfaces, and the use of generic types.
