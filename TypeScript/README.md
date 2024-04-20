@@ -199,15 +199,15 @@ This will launch the application in your default browser at the address `localho
 | ------ | ------------------------ | --------------------------------------------------------------------------- |
 | 0      | [**Student Interface**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_0/js/main.ts) | Defines the basic properties of a student.                                 |
 | 1      | [**Teacher Interface**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_1/js/main.ts) | Adds specific methods for teachers.                                         |
-| 2      | [**Directors Interface**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_2/js/main.ts) | Extends the Teacher interface to include management responsibilities.       |
-| 3      | [**Print Teacher**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_3/js/main.ts) | Implements a function to format teacher's name.                             |
-| 4      | [**Student Class**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_4/js/main.ts) | Implements a class representing a student with methods for homework and display name. |
-| 5      | [**Advanced Types Part 1**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_5/js/main.ts) | Explores advanced TypeScript types.                                         |
-| 6      | [**Employee Functions**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_6/js/main.ts) | Functions to determine if an employee is a Director and execute appropriate tasks. |
-| 7      | [**String Literal Types**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_7/js/main.ts) | Implements string literals to restrict input to specific strings.           |
-| 8      | [**Ambient Namespaces**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_8/js/main.ts) | Uses ambient namespaces for advanced type management in TypeScript.         |
-| 9      | [**Namespace & Declaration Merging**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_9/js/main.ts) | Explores the concept of declaration merging in TypeScript namespaces.       |
-| 10     | [**Brand Convention & Nominal Typing**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_10/js/main.ts) | Implements nominal typing to enforce type distinctions at runtime.          |
+| 2      | [**Directors Interface**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_1/js/main.ts) | Extends the Teacher interface to include management responsibilities.       |
+| 3      | [**Print Teacher**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_1/js/main.ts) | Implements a function to format teacher's name.                             |
+| 4      | [**Student Class**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_1/js/main.ts) | Implements a class representing a student with methods for homework and display name. |
+| 5      | [**Advanced Types Part 1**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_2/) | Explores advanced TypeScript types.                                         |
+| 6      | [**Employee Functions**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_2/js/main.ts) | Functions to determine if an employee is a Director and execute appropriate tasks. |
+| 7      | [**String Literal Types**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_2/js/main.ts) | Implements string literals to restrict input to specific strings.           |
+| 8      | [**Ambient Namespaces**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_3/) | Uses ambient namespaces for advanced type management in TypeScript.         |
+| 9      | [**Namespace & Declaration Merging**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_4/) | Explores the concept of declaration merging in TypeScript namespaces.       |
+| 10     | [**Brand Convention & Nominal Typing**](https://github.com/MathieuMorel62/holbertonschool-web_react/blob/main/TypeScript/task_5/) | Implements nominal typing to enforce type distinctions at runtime.          |
 
 ## 📬 Contact
 
