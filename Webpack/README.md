@@ -1,5 +1,7 @@
 # <p align="center">Webpack</p>
 
+![webpack](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/d0d8213f-b8f7-48b4-a8ef-1b8db927e60c)
+
 ## 📝 Description
 
 This project consists of using and configuring Webpack to manage JavaScript resources and modules in the development of web applications. The main objective is to understand the internal operation of Webpack, including dependency management, asset transformation and optimization of output files. This also includes the implementation of development servers, the use of plugins, and the modularization of code to improve the performance and maintainability of the project.
