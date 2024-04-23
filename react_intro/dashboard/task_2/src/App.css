@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
   color: #e11d3f;
-  font-size: larger;
+  font-size: x-large;
   border-bottom: 3px solid #e11d3f;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .App-header img {
@@ -16,12 +16,24 @@
 .App-body {
   margin-top: 3rem;
   margin-left: 3rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.3rem;
 }
 
 .App-body p {
-  font-size: 1.3rem;
   padding: 15px;
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.App-body form {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin-top: -25px;
+  gap: 15px;
+}
+
+.App-body form button {
+  cursor: pointer;
 }
 
 .App-footer {
@@ -39,6 +51,6 @@
 
 .App-footer p {
   font-size: 1.3rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   font-style: italic;
 }
