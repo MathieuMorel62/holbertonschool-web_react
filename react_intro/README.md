@@ -77,6 +77,12 @@ npm start
 - **Start the project**: After installation, run `npm start` to see the React application in action.
 - **Modify a component**: Open `src/App.js` and modify the components to see the changes in real time.
 
+## ✨ Main Features
+
+1. **React Components**: Creation and use of components to build dynamic user interfaces.
+2. **State Management**: Use of the state in components to manage application data.
+3. **Props**: Passing data to child components via props for a modular architecture.
+
 ## 📝 List of Tasks
 
 | Number | Task | Description |
@@ -93,12 +99,6 @@ npm start
 | 9 | [**Install Babel**](https://github.com/MathieuMorel62/holbertonschool-web_react/tree/main/react_intro/task_5/dashboard) | Installation and configuration of Babel for JSX and modern JavaScript support. |
 | 10 | [**Reorganize the files**](https://github.com/MathieuMorel62/holbertonschool-web_react/tree/main/react_intro/task_5/dashboard/src) | Structuring of project folders for better organization and maintenance. |
 | 11 | [**Tests with Jest and Enzyme**](https://github.com/MathieuMorel62/holbertonschool-web_react/tree/main/react_intro/task_5/dashboard/config) | Installation of Jest and configuration of tests to ensure the quality of the code. |
-
-## ✨ Main Features
-
-1. **React Components**: Creation and use of components to build dynamic user interfaces.
-2. **State Management**: Use of the state in components to manage application data.
-3. **Props**: Passing data to child components via props for a modular architecture.
 
 ## 📬 Contact
 - Profil LinkedIn: [Mathieu Morel](https://www.linkedin.com/in/mathieu-morel-9ab457261/)
