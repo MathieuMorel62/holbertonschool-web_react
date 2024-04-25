@@ -1,5 +1,7 @@
 # <p align="center">React Intro</p>
 
+![react](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/e5674559-d3f3-47c3-bf44-a6a1317318a3)
+
 ## 📝 Description
 
 **Introduction to React** is a project designed to familiarize developers with the fundamentals of React, a popular JavaScript library for building user interfaces. This project covers basic concepts such as components, state, and props, offering an interactive learning platform. By participating in this project, developers will acquire a solid understanding of React, which will allow them to build dynamic and responsive web applications. Emphasis is placed on modern development practices and the importance of the maintainable and scalable code structure.
@@ -67,6 +69,8 @@ npm install
 ```bash
 npm start
 ```
+
+<img width="1641" alt="Capture d’écran 2024-04-25 à 16 15 14" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/6194e5ff-c301-472b-aae5-ccec282c204a">
 
 ## 💡 Use
 
