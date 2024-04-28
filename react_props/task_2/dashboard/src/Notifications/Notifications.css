@@ -1,0 +1,30 @@
+.Notifications {
+  padding: 15px;
+  border: 2px dashed #e11d3f;
+  margin-bottom: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.Notifications p {
+  font-size: 1.2rem;
+}
+
+.Notifications ul {
+  font-size: 1.2rem;
+}
+
+.Notifications ul li[data-priority='default'] {
+  color: blue;
+}
+
+.Notifications ul li[data-priority='urgent'] {
+  color: red;
+}
+
+li[data-notification-type="default"] {
+  color: blue;
+}
+
+li[data-notification-type="urgent"] {
+  color: red;
+}
