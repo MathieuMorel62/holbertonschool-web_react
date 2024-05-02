@@ -1,5 +1,7 @@
 # <p align="center">React Props</p>
 
+![props](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/6709bd8a-3378-42c9-bd03-46d554556938)
+
 ## 📝 Description
 
 The **React Props** project is designed to provide an in-depth understanding of the properties in React, an essential element for the management of data between components. This project allows developers to master the reuse of components and the manipulation of dynamic data within React applications. By focusing on functional components, the project guides through best practices to structure a React application in an efficient and maintainable way.
@@ -82,6 +84,12 @@ npm test
 ## 💡 Use
 
 To see the components in action, launch the application and go to `http://localhost:3000`. You will be able to observe different components such as headers, footers, and connection areas, all managing their own props in isolation.
+
+<img width="400" alt="Capture d’écran 2024-05-02 à 11 07 56" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/084f3c76-34a8-4f30-a39f-c18e7d872b87"> 
+<img width="400" alt="Capture d’écran 2024-05-02 à 11 08 16" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/f3ae346c-8263-4f33-b339-94d9ca9172ff"> 
+<img width="400" alt="Capture d’écran 2024-05-02 à 11 08 38" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/3edb9f74-9f9a-4387-b444-0ef45df77a15"> 
+<img width="400" alt="Capture d’écran 2024-05-02 à 11 09 04" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/11c65f81-e28e-4218-b83c-44d3e26410c2"> 
+
 
 ## ✨ Main Features
 
