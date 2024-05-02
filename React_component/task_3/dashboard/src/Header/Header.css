@@ -1,0 +1,25 @@
+header {
+  display: flex;
+  align-items: center;
+  color: #e11d3f;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+header h1 {
+  margin: 0px;
+  padding: 30px;
+  flex-grow: 1;
+  font-size: 3rem;
+}
+
+.App-header img {
+  max-height: 260px;
+  margin-right: 1rem;
+}
+
+.hr-header {
+  color: red;
+  background-color: red;
+  height: 0.1rem;
+  min-width: 100%;
+}
