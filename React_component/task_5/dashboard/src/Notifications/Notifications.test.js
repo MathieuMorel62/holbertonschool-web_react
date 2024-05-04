@@ -86,4 +86,27 @@ describe('Notifications Component', () => {
     instance.markAsRead(id);
     expect(consoleSpy).toHaveBeenCalledWith(`Notification ${id} has been marked as read`);
   });
+
+  it('does not re-render when updating props with the same list', () => {
+    const notifications = [{ id: 1, type: 'default', value: 'New course available' }];
+    wrapper.setProps({ listNotifications: notifications });
+
+    const spy = jest.spyOn(wrapper.instance(), 'render');
+    wrapper.setProps({ listNotifications: notifications });
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('re-renders when updating props with a longer list', () => {
+    const notifications = [{ id: 1, type: 'default', value: 'New course available' }];
+    wrapper.setProps({ listNotifications: notifications });
+
+    const longerNotifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' },
+    ];
+
+    const spy = jest.spyOn(wrapper.instance(), 'render');
+    wrapper.setProps({ listNotifications: longerNotifications });
+    expect(spy).toHaveBeenCalled();
+  });
 });
