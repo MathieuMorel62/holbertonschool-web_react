@@ -5,13 +5,16 @@ import "./Notifications.css";
 
 function NotificationItem({ type, html, value, markAsRead, id }) {
   return (
-    <li data-notification-type={type} onClick={() => markAsRead(id)}>
-      {html ? (
-        <span dangerouslySetInnerHTML={html} />
-      ) : value}
-    </li>
+    <>
+      <li data-notification-type={type} onClick={() => markAsRead(id)}>
+        {html ? (
+          <span dangerouslySetInnerHTML={html} />
+        ) : value}
+      </li>
+    </>
   );
 }
+
 
 NotificationItem.propTypes = {
   type: PropTypes.string.isRequired,
@@ -26,4 +29,3 @@ NotificationItem.defaultProps = {
 };
 
 export default React.memo(NotificationItem);
-
