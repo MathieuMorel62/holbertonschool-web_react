@@ -1,4 +1,6 @@
-<p align="center">React Component</p>
+# <p align="center">React Component</p>
+
+<img src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/241b8d0e-430e-409d-ba87-c9318ddead12" width="100%"/>
 
 ## 📝 Description
 
