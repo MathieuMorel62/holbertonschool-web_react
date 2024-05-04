@@ -17,6 +17,10 @@ class Notifications extends React.Component {
     this.markAsRead = this.markAsRead.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.listNotifications.length > this.props.listNotifications.length;
+  }
+
   markAsRead(id) {
     console.log(`Notification ${id} has been marked as read`);
   }
@@ -51,7 +55,7 @@ class Notifications extends React.Component {
             <p>Here is the list of notifications</p>
             <ul>
               {listNotifications.length > 0 ? (
-                listNotifications.map(notification => (
+                listNotifications.map((notification) => (
                   <NotificationItem
                     key={notification.id}
                     type={notification.type}
@@ -74,12 +78,12 @@ class Notifications extends React.Component {
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
-  listNotifications: PropTypes.arrayOf(NotificationItemShape)
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
 };
 
 Notifications.defaultProps = {
   displayDrawer: false,
-  listNotifications: []
+  listNotifications: [],
 };
 
 export default Notifications;
