@@ -4,19 +4,6 @@ import { getFullYear, getFooterCopy } from "../utils/utils";
 
 
 const styles = StyleSheet.create({
-  footer: {
-    display: 'flex',
-    position: 'fixed',
-    bottom: '0',
-    left: '0',
-    width: '100%',
-    textAlign: 'center',
-    padding: '10px',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '1.2rem',
-  },
-
   p: {
     fontFamily: '"Times New Roman", Times, serif',
     fontStyle: 'italic',
@@ -35,7 +22,7 @@ const Footer = () => {
   return (
     <>
       <hr className={css(styles.hr)} />
-      <footer className={css(styles.footer)}>
+      <footer>
         <p className={css(styles.p)}>Copyright {getFullYear()} - {getFooterCopy(true)}</p>
       </footer>
     </>

@@ -10,6 +10,30 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import BodySection from "../BodySection/BodySection";
 
 
+const style = StyleSheet.create({
+  app: {
+    fontFamily: 'Times New Roman, Times, serif',
+  },
+
+  body: {
+    height: '500px',
+  },
+
+  footer: {
+    display: 'flex',
+    position: 'fixed',
+    bottom: '0',
+    left: '0',
+    width: '100%',
+    textAlign: 'center',
+    padding: '10px',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '1.2rem',
+  },
+});
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -51,11 +75,11 @@ class App extends React.Component {
     return (
       <>
         <Notifications displayDrawer={true} listNotifications={listNotifications} />
-        <div className="App">
-          <div className="App-header">
+        <div className={css(style.app)}>
+          <div>
             <Header />
           </div>
-          <div className="App-body">
+          <div className={css(style.body)}>
             {isLoggedIn ?
               <BodySectionWithMarginBottom title="Course list">
                 <CourseList listCourses={listCourses} />
@@ -68,7 +92,7 @@ class App extends React.Component {
               <p>Latest updates and insights from our school community.</p>
             </BodySection>
           </div>
-          <div className="App-footer">
+          <div className={css(style.footer)}>
             <Footer />
           </div>
         </div>
