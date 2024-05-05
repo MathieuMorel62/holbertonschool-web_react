@@ -1,0 +1,24 @@
+.App-body {
+  margin: 3rem 1rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.3rem;
+  position: relative;
+}
+
+.App-body p {
+  padding: 15px;
+  margin-bottom: 1rem;
+}
+
+.App-body form {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin-top: -15px;
+  gap: 1rem;
+  position: absolute;
+}
+
+.App-body form button {
+  cursor: pointer;
+}

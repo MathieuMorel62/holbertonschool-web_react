@@ -1,0 +1,40 @@
+.Notifications {
+  padding: 15px;
+  border: 2px dashed #e11d3f;
+  margin: 50px 20px 20px 0;
+  font-family: 'Times New Roman', Times, serif;
+  width: 35%;
+  float: right;
+}
+
+.menuItem {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  font-size: 1.2rem;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.Notifications p {
+  font-size: 1.2rem;
+}
+
+.Notifications ul {
+  font-size: 1.2rem;
+}
+
+.Notifications ul li[data-priority='default'] {
+  color: blue;
+}
+
+.Notifications ul li[data-priority='urgent'] {
+  color: red;
+}
+
+li[data-notification-type="default"] {
+  color: blue;
+}
+
+li[data-notification-type="urgent"] {
+  color: red;
+}
