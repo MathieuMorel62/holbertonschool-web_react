@@ -1,5 +1,7 @@
 # <p align="center">🌟 React Inline Styling 🌟</p>
 
+![inline style](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/508e4458-ca46-40ae-a006-eb1b26a0056d)
+
 ## 📝 Description
 
 The **React Inline Styling** project explores online stylization techniques in React applications. This project focuses on the application of style directly in the component, providing increased flexibility in the design of the user interface. It highlights the difference between the use of CSS files and online style, and also introduces the CSS-in-JS tool, **Aphrodite**.
@@ -61,6 +63,8 @@ npm start
 
 This will start the development server and open the application in your default browser at `http://localhost:8564/`
 
+<img width="1314" alt="Capture d’écran 2024-05-07 à 13 15 26" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/1235913b-6d1e-47c5-b7bf-c0b9a73c6ebd">
+
 - Example of use 2: Test the components
 
 To test the components, open your terminal and run:
@@ -68,6 +72,8 @@ To test the components, open your terminal and run:
 ```bash
 npm run test
 ```
+
+<img width="1049" alt="Capture d’écran 2024-05-07 à 13 17 42" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/c58e4864-4ad1-4234-ac14-0d90fe4a602a">
 
 This launches the tests defined in the `.test.js` files and displays the results.
 
