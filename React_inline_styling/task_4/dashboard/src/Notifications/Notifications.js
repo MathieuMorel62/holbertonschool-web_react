@@ -23,9 +23,6 @@ const bounceFrames = {
     '0%': {
         transform: 'translateY(0px)',
     },
-    '50%': {
-        transform: 'translateY(-5px)',
-    },
     '100%': {
         transform: 'translateY(5px)',
     }
@@ -35,17 +32,11 @@ const styles = StyleSheet.create({
   notifications: {
     padding: "15px",
     border: "2px dashed #e11d3f",
-    margin: "50px 20px 20px 0",
     fontFamily: "Times New Roman, Times, serif",
     width: "35%",
     float: "right",
     fontSize: "20px",
-    "@media (max-width: 900px)": {
-      width: "35%",
-      position: "relative",
-      margin: 0,
-      padding: 0,
-    },
+    backgroundColor: "#fff8f8",
     "@media (max-width: 900px)": {
       width: "100%",
       height: "100vh",
@@ -69,16 +60,16 @@ const styles = StyleSheet.create({
     cursor: "pointer",
     ":hover": {
       animationName: [opacityFrames, bounceFrames],
-      animationDuration: ["1s", "0.5s"],
-      animationIterationCount: [3, 3],
+      animationDuration: ["0.2s", "0.2s"],
+      animationIterationCount: [3, 6],
       animationDirection: "alternate",
     },
   },
 
   menuItemActive: {
     animationName: [opacityFrames, bounceFrames],
-    animationDuration: ["1s", "0.5s"],
-    animationIterationCount: [3, 3],
+    animationDuration: ["0.2s", "0.2s"],
+    animationIterationCount: [3, 6],
     animationDirection: "alternate",
   },
 
