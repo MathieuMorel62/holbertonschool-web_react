@@ -6,11 +6,22 @@ import { StyleSheetTestUtils } from "aphrodite";
 
 describe('Notifications Component', () => {
   let wrapper;
+  let mockHandleDisplayDrawer;
+  let mockHandleHideDrawer;
   const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
   beforeEach(() => {
+    mockHandleDisplayDrawer = jest.fn();
+    mockHandleHideDrawer = jest.fn();
     StyleSheetTestUtils.suppressStyleInjection();
-    wrapper = shallow(<Notifications displayDrawer={true} listNotifications={[]} />);
+    wrapper = shallow(
+      <Notifications
+        displayDrawer={true}
+        listNotifications={[]}
+        handleDisplayDrawer={mockHandleDisplayDrawer}
+        handleHideDrawer={mockHandleHideDrawer}
+      />
+    );
   });
 
   afterEach(() => {
@@ -20,6 +31,17 @@ describe('Notifications Component', () => {
 
   it('should render without crashing', () => {
     expect(wrapper).not.toBeNull();
+  });
+
+  it('calls handleDisplayDrawer when menu item is clicked', () => {
+    wrapper.setProps({ displayDrawer: false });
+    wrapper.find('[data-test="menuItem"]').simulate('click');
+    expect(mockHandleDisplayDrawer).toHaveBeenCalled();
+  });
+
+  it('calls handleHideDrawer when close button is clicked', () => {
+    wrapper.find('[aria-label="Close"]').simulate('click');
+    expect(mockHandleHideDrawer).toHaveBeenCalled();
   });
 
   it('renders NotificationItem elements correctly with data', () => {
@@ -106,33 +128,5 @@ describe('Notifications Component', () => {
     const spy = jest.spyOn(wrapper.instance(), 'render');
     wrapper.setProps({ listNotifications: longerNotifications });
     expect(spy).toHaveBeenCalled();
-  });
-
-
-  describe('Notifications component interactions', () => {
-    let wrapper;
-    const mockDisplayDrawer = jest.fn();
-    const mockHideDrawer = jest.fn();
-    
-    beforeEach(() => {
-      wrapper = shallow(
-        <Notifications 
-          displayDrawer={false} 
-          handleDisplayDrawer={mockDisplayDrawer} 
-          handleHideDrawer={mockHideDrawer}
-        />
-      );
-    });
-  
-    it('calls handleDisplayDrawer when menu item is clicked', () => {
-      wrapper.find('[data-test="menuItem"]').simulate('click');
-      expect(mockDisplayDrawer).toHaveBeenCalled();
-    });
-  
-    it('calls handleHideDrawer when close button is clicked', () => {
-      wrapper.setProps({ displayDrawer: true });
-      wrapper.find('button').simulate('click');
-      expect(mockHideDrawer).toHaveBeenCalled();
-    });
   });
 });
