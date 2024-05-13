@@ -106,7 +106,7 @@ class Notifications extends React.Component {
     return (
       <>
         {!displayDrawer && (
-          <div className={menuItemClass} data-test="menuItem" onClick={this.props.handleDisplayDrawer}>
+          <div className={menuItemClass} data-test="menuItem" onClick={handleDisplayDrawer}>
             <p>Your notifications</p>
           </div>
         )}
@@ -122,7 +122,7 @@ class Notifications extends React.Component {
                 cursor: "pointer",
               }}
               aria-label="Close"
-              onClick={this.props.handleHideDrawer}
+              onClick={handleHideDrawer}
             >
               <img
                 src={closeIcon}
@@ -156,9 +156,9 @@ class Notifications extends React.Component {
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
-  listNotifications: PropTypes.arrayOf(NotificationItemShape),
   handleDisplayDrawer: PropTypes.func,
   handleHideDrawer: PropTypes.func,
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
 };
 
 Notifications.defaultProps = {
@@ -167,5 +167,6 @@ Notifications.defaultProps = {
   handleHideDrawer: () => {},
   listNotifications: [],
 };
+
 
 export default Notifications;
