@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import App from './App';
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
@@ -43,20 +43,23 @@ describe('App component', () => {
     expect(wrapper.find(Footer).exists()).toBe(true);
   });
 
-  it('default state for displayDrawer is false', () => {
-    expect(wrapper.state('displayDrawer')).toBe(false);
+  it('should have a default state for displayDrawer to false', () => {
+    const wrapper = shallow(<App/>);
+    expect(wrapper.state('displayDrawer')).toEqual(false);
   });
 
-  it('handleDisplayDrawer sets displayDrawer to true', () => {
+  it('should have a state for displayDrawer to true after handleDisplayDrawer call', () => {
+    const wrapper = shallow(<App/>);
     wrapper.instance().handleDisplayDrawer();
-    expect(wrapper.state('displayDrawer')).toBe(true);
+    expect(wrapper.state('displayDrawer')).toEqual(true);
   });
 
-  it('handleHideDrawer sets displayDrawer to false', () => {
-    wrapper.instance().handleDisplayDrawer();
+  it('should have a state for displayDrawer to false after handleHideDrawer call', () => {
+    const wrapper = shallow(<App/>);
+    wrapper.setState({ displayDrawer: true });
     wrapper.instance().handleHideDrawer();
-    expect(wrapper.state('displayDrawer')).toBe(false);
-  });
+    expect(wrapper.state('displayDrawer')).toEqual(false);
+  })
 
   describe('when isLoggedIn is true', () => {
     beforeEach(() => {
