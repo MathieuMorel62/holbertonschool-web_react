@@ -81,7 +81,7 @@ class App extends React.Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    const { listCourses, listNotifications, displayDrawer } = this.state;
+    const { listCourses, listNotifications } = this.state;
 
     return (
       <>
