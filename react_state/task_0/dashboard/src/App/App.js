@@ -10,15 +10,25 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import BodySection from "../BodySection/BodySection";
 
 
+const COURSES_DATA = [
+  { id: 1, name: 'ES6', credit: 60 },
+  { id: 2, name: 'Webpack', credit: 20 },
+  { id: 3, name: 'React', credit: 40 }
+];
+
+const NOTIFICATIONS_DATA = [
+  { id: 1, type: 'default', value: 'New course available' },
+  { id: 2, type: 'urgent', value: 'New resume available' },
+  { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
+];
+
 const style = StyleSheet.create({
   app: {
     fontFamily: 'Times New Roman, Times, serif',
   },
-
   body: {
     height: '500px',
   },
-
   footer: {
     display: 'flex',
     position: 'fixed',
@@ -33,27 +43,19 @@ const style = StyleSheet.create({
   },
 });
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listCourses: [
-        { id: 1, name: 'ES6', credit: 60 },
-        { id: 2, name: 'Webpack', credit: 20 },
-        { id: 3, name: 'React', credit: 40 }
-      ],
-      listNotifications: [
-        { id: 1, type: 'default', value: 'New course available' },
-        { id: 2, type: 'urgent', value: 'New resume available' },
-        { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
-      ],
+      listCourses: COURSES_DATA,
+      listNotifications: NOTIFICATIONS_DATA,
       displayDrawer: false,
     };
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
+
 
   handleDisplayDrawer() {
     this.setState({ displayDrawer: true });
