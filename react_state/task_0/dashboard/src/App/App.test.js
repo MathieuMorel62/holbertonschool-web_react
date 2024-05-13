@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import App from './App';
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
@@ -7,6 +7,7 @@ import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
 import { StyleSheetTestUtils } from 'aphrodite';
+
 
 describe('App component', () => {
   let wrapper;
@@ -42,6 +43,21 @@ describe('App component', () => {
     expect(wrapper.find(Footer).exists()).toBe(true);
   });
 
+  it('default state for displayDrawer is false', () => {
+    expect(wrapper.state('displayDrawer')).toBe(false);
+  });
+
+  it('handleDisplayDrawer sets displayDrawer to true', () => {
+    wrapper.instance().handleDisplayDrawer();
+    expect(wrapper.state('displayDrawer')).toBe(true);
+  });
+
+  it('handleHideDrawer sets displayDrawer to false', () => {
+    wrapper.instance().handleDisplayDrawer();
+    wrapper.instance().handleHideDrawer();
+    expect(wrapper.state('displayDrawer')).toBe(false);
+  });
+
   describe('when isLoggedIn is true', () => {
     beforeEach(() => {
       wrapper.setProps({ isLoggedIn: true });
@@ -67,23 +83,6 @@ describe('App component', () => {
       expect(mockLogOut).toHaveBeenCalled();
       expect(alertMock).toHaveBeenCalledWith('Logging you out');
       alertMock.mockRestore();
-    });
-  });
-
-  describe('App component state management', () => {
-    const wrapper = shallow(<App />);
-    it('default state for displayDrawer is false', () => {
-      expect(wrapper.state('displayDrawer')).toBe(false);
-    });
-
-    it('state changes to true after calling handleDisplayDrawer', () => {
-      wrapper.instance().handleDisplayDrawer();
-      expect(wrapper.state('displayDrawer')).toBe(true);
-    });
-
-    it('state changes to false after calling handleHideDrawer', () => {
-      wrapper.instance().handleHideDrawer();
-      expect(wrapper.state('displayDrawer')).toBe(false);
     });
   });
 });
