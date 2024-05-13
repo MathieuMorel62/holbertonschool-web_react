@@ -55,6 +55,14 @@ class App extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
+
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
+  }
+
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   }
@@ -71,21 +79,18 @@ class App extends React.Component {
     }
   }
 
-  handleDisplayDrawer() {
-    this.setState({ displayDrawer: true });
-  }
-
-  handleHideDrawer() {
-    this.setState({ displayDrawer: false });
-  }
-
   render() {
     const { isLoggedIn } = this.props;
-    const { listCourses, listNotifications } = this.state;
+    const { listCourses, listNotifications, displayDrawer } = this.state;
 
     return (
       <>
-        <Notifications displayDrawer={this.state.displayDrawer} listNotifications={listNotifications} handleDisplayDrawer={this.handleDisplayDrawer} handleHideDrawer={this.handleHideDrawer} />
+        <Notifications
+          displayDrawer={displayDrawer}
+          listNotifications={listNotifications}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
+        />
         <div className={css(style.app)}>
           <div>
             <Header />
