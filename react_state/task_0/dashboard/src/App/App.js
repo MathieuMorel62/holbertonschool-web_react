@@ -1,121 +1,83 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { StyleSheet, css } from "aphrodite";
-import Header from "../Header/Header";
-import Login from "../Login/Login";
-import CourseList from "../CourseList/CourseList";
-import Notifications from "../Notifications/Notifications";
-import Footer from "../Footer/Footer";
-import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
-import BodySection from "../BodySection/BodySection";
+import BodySection from '../BodySection/BodySection';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import Notifications from '../Notifications/Notifications';
+import Login from '../Login/Login';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import CourseList from '../CourseList/CourseList';
+import { getLatestNotification } from '../utils/utils';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { StyleSheet, css } from 'aphrodite';
 
-
-const COURSES_DATA = [
-  { id: 1, name: 'ES6', credit: 60 },
-  { id: 2, name: 'Webpack', credit: 20 },
-  { id: 3, name: 'React', credit: 40 }
+const listCourses = [
+  {id: 1, name: 'ES6', credit: 60},
+  {id: 2, name: 'Webpack', credit: 20},
+  {id: 3, name: 'React', credit: 40}
 ];
 
-const NOTIFICATIONS_DATA = [
-  { id: 1, type: 'default', value: 'New course available' },
-  { id: 2, type: 'urgent', value: 'New resume available' },
-  { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
-];
-
-const style = StyleSheet.create({
-  app: {
-    fontFamily: 'Times New Roman, Times, serif',
-  },
-  body: {
-    height: '500px',
-  },
-  footer: {
-    display: 'flex',
-    position: 'fixed',
-    bottom: '0',
-    left: '0',
-    width: '100%',
-    textAlign: 'center',
-    padding: '10px',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '1.2rem',
-  },
-});
+const listNotifications = [
+  { id: 1, value: 'New course available', type: 'default' },
+  { id: 2, value: 'New resume available', type: 'urgent' },
+  { id: 3, html: { __html: getLatestNotification() }, type: 'urgent' },
+]
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      listCourses: COURSES_DATA,
-      listNotifications: NOTIFICATIONS_DATA,
-      displayDrawer: false,
-    };
+    this.handleKey = this.handleKey.bind(this);
+    this.state = { displayDrawer: false };
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
-
-
-  handleDisplayDrawer() {
-    this.setState({ displayDrawer: true });
-  }
-
-  handleHideDrawer() {
-    this.setState({ displayDrawer: false });
   }
 
   componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keydown', this.handleKey);
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  handleKeyDown(event) {
-    if (event.ctrlKey && event.key === 'h') {
-      event.preventDefault();
+  handleKey = e => {
+    if (e.key == 'h' && e.ctrlKey) {
       alert('Logging you out');
       this.props.logOut();
     }
   }
 
-  render() {
-    const { isLoggedIn } = this.props;
-    const { listCourses, listNotifications, displayDrawer } = this.state;
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true })
+  }
 
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false })
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKey);
+  }
+
+  render() {
+    const {displayDrawer} = this.state;
     return (
-      <>
-        <Notifications
-          displayDrawer={displayDrawer}
-          listNotifications={listNotifications}
-          handleDisplayDrawer={this.handleDisplayDrawer}
-          handleHideDrawer={this.handleHideDrawer}
-        />
+      <React.Fragment>
+        <Notifications listNotifications={listNotifications}
+                       displayDrawer={displayDrawer}
+                       handleDisplayDrawer={this.handleDisplayDrawer}
+                       handleHideDrawer={this.handleHideDrawer}/>
         <div className={css(style.app)}>
-          <div>
-            <Header />
-          </div>
+          <Header></Header>
           <div className={css(style.body)}>
-            {isLoggedIn ?
-              <BodySectionWithMarginBottom title="Course list">
-                <CourseList listCourses={listCourses} />
-              </BodySectionWithMarginBottom> :
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login />
-              </BodySectionWithMarginBottom>
-            }
-            <BodySection title="News from the School">
-              <p>Latest updates and insights from our school community.</p>
+            { this.props.isLoggedIn ?
+              <BodySectionWithMarginBottom title={'Course list'}><CourseList listCourses={listCourses} /> </BodySectionWithMarginBottom>
+              : <BodySectionWithMarginBottom title={'Log in to continue'}><Login /></BodySectionWithMarginBottom> }
+            <BodySection title={'News from the School'}>
+              <p>Lorem ipsum</p>
             </BodySection>
           </div>
           <div className={css(style.footer)}>
-            <Footer />
+            <Footer></Footer>
           </div>
         </div>
-      </>
-    );
+      </React.Fragment>
+    )
   }
 }
 
@@ -128,5 +90,23 @@ App.defaultProps = {
   isLoggedIn: false,
   logOut: () => {},
 };
+
+const style = StyleSheet.create({
+  app: {
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  },
+
+  body: {
+    height: '500px',
+  },
+
+  footer: {
+    display: 'flex',
+    textAlign: 'center',
+    flexDirection: 'column',
+    fontStyle: 'italic',
+    borderTop: 'solid 2px #eb4034',
+  },
+});
 
 export default App;
