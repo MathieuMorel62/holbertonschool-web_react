@@ -90,7 +90,7 @@ class Notifications extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.listNotifications.length > this.props.listNotifications.length || nextProps.displayDrawer !== this.props.displayDrawer;
+    return nextProps.listNotifications.length > this.props.listNotifications || nextProps.displayDrawer !== this.props.displayDrawer;
   }
 
   markAsRead(id) {
