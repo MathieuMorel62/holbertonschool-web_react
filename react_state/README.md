@@ -1,5 +1,7 @@
 # <p align="center">🌟 React State 🌟</p>
 
+![state](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/ab90a717-5cbc-4fdd-bf7b-d78fa4db3484)
+
 ## 📝 Description
 
 `React State` is a project designed to demonstrate the effective use of local state in React applications, a crucial concept for modern front-end development. This project allows developers to deeply understand the life cycle of React components, state management and best practices to optimize user interactions through controlled and uncontrolled components.
