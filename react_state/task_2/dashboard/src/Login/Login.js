@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { css, StyleSheet } from "aphrodite";
 
-
 const styles = StyleSheet.create({
   AppBody: {
     fontFamily: '"Times New Roman", Times, serif',
@@ -42,7 +41,6 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
       email: '',
       password: '',
       enableSubmit: false,
@@ -71,9 +69,8 @@ class Login extends Component {
 
   handleLoginSubmit(e) {
     e.preventDefault();
-    this.setState({
-      isLoggedIn: true
-    });
+    const { email, password } = this.state;
+    this.props.logIn(email, password);
   }
 
   render() {
