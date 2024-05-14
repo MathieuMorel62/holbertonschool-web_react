@@ -25,6 +25,13 @@ describe('<CourseListRow/>', () => {
 
   it('test when isHeader is false', () => {
     const wrapper = shallow(<CourseListRow isHeader={false} textFirstCell="Course name" textSecondCell="Credit" />);
-    expect(wrapper.html()).toContain("<td>Course name</td><td>Credit</td>");
+    expect(wrapper.html()).toContain("<td><input type=\"checkbox\"/>Course name</td><td>Credit</td>");
+  });
+
+  it('should check the checkbox and verify the class change', () => {
+    const wrapper = shallow(<CourseListRow isHeader={false} textFirstCell="Course name" textSecondCell="Credit" />);
+    const checkbox = wrapper.find('input[type="checkbox"]');
+    checkbox.simulate('change', { target: { checked: true } });
+    expect(wrapper.find('tr').prop('className')).toContain('rowChecked');
   });
 });
