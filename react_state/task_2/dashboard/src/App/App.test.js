@@ -7,15 +7,18 @@ import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
 import { StyleSheetTestUtils } from 'aphrodite';
-
+import { AppContext, defaultUser } from './AppContext';
 
 describe('App component', () => {
   let wrapper;
-  const mockLogOut = jest.fn();
 
   beforeEach(() => {
     StyleSheetTestUtils.suppressStyleInjection();
-    wrapper = mount(<App isLoggedIn={false} logOut={mockLogOut} />);
+    wrapper = mount(
+      <AppContext.Provider value={{ user: defaultUser, logOut: jest.fn() }}>
+        <App />
+      </AppContext.Provider>
+    );
   });
 
   afterEach(() => {
@@ -44,26 +47,32 @@ describe('App component', () => {
   });
 
   it('should have a default state for displayDrawer to false', () => {
-    const wrapper = shallow(<App/>);
+    const wrapper = shallow(<App />);
     expect(wrapper.state('displayDrawer')).toEqual(false);
   });
 
   it('should have a state for displayDrawer to true after handleDisplayDrawer call', () => {
-    const wrapper = shallow(<App/>);
+    const wrapper = shallow(<App />);
     wrapper.instance().handleDisplayDrawer();
     expect(wrapper.state('displayDrawer')).toEqual(true);
   });
 
   it('should have a state for displayDrawer to false after handleHideDrawer call', () => {
-    const wrapper = shallow(<App/>);
+    const wrapper = shallow(<App />);
     wrapper.setState({ displayDrawer: true });
     wrapper.instance().handleHideDrawer();
     expect(wrapper.state('displayDrawer')).toEqual(false);
-  })
+  });
 
-  describe('when isLoggedIn is true', () => {
+  describe('when user is logged in', () => {
     beforeEach(() => {
-      wrapper.setProps({ isLoggedIn: true });
+      wrapper.setState({
+        user: {
+          email: 'test@example.com',
+          password: 'password',
+          isLoggedIn: true,
+        }
+      });
     });
 
     it('does not include the Login component when logged in', () => {
@@ -83,9 +92,30 @@ describe('App component', () => {
     it('calls logOut and shows alert when Ctrl+H is pressed', () => {
       const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
       document.dispatchEvent(keyDownEvent(true, 'h'));
-      expect(mockLogOut).toHaveBeenCalled();
+      expect(wrapper.state().user).toEqual(defaultUser);
       expect(alertMock).toHaveBeenCalledWith('Logging you out');
       alertMock.mockRestore();
     });
+  });
+
+  it('logIn function updates the state correctly', () => {
+    wrapper.instance().logIn('test@example.com', 'password');
+    expect(wrapper.state().user).toEqual({
+      email: 'test@example.com',
+      password: 'password',
+      isLoggedIn: true,
+    });
+  });
+
+  it('logOut function updates the state correctly', () => {
+    wrapper.setState({
+      user: {
+        email: 'test@example.com',
+        password: 'password',
+        isLoggedIn: true,
+      }
+    });
+    wrapper.instance().logOut();
+    expect(wrapper.state().user).toEqual(defaultUser);
   });
 });
