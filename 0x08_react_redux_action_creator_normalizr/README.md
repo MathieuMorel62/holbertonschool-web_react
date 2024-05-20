@@ -1,5 +1,7 @@
 # <p align="center">React Redux Action Creator & Normalizr</p>
 
+![redux](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/395f4584-ff1f-4259-a914-cfeba34906b5)
+
 ## 📝 Description
 
 The **React Redux action creator + normalizr** project aims to illustrate the use of Redux with the creative actions and the Normalizr library for state normalization. It offers a structured approach to managing the state in React applications, simplifying the process of managing complex data with Normalizr.
@@ -157,13 +159,9 @@ npm test
 ## ✨ Main Features
 
 - **Reading JSON data**: The project allows you to read and display `notifications.json` data in a list.
-
 - **Data normalization**: Using Normalizr to normalize nested JSON data for easier state management.
-
 - **Redux actions**: Creation of Redux actions to manage user interactions and update the overall status.
-
 - **Asynchronous actions**: Management of asynchronous actions with Redux Thunk for simulated API calls.
-
 - **Unit Tests**: Writing unit tests to validate the proper functioning of Redux actions and reducers.
 
 ## 📝 List of Tasks
