@@ -1,5 +1,27 @@
-// src/schema/notifications.test.js
 import normalizedData from './notifications';
+import { getAllNotificationsByUser } from './notifications';
+
+
+test('getAllNotificationsByUser returns correct notifications for user', () => {
+  const userId = '5debd764a7c57c7839d722e9';
+  const expectedNotifications = [
+    {
+      guid: '2d8e40be-1c78-4de0-afc9-fcc147afd4d2',
+      isRead: true,
+      type: 'urgent',
+      value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.'
+    },
+    {
+      guid: '280913fe-38dd-4abd-8ab6-acdb4105f922',
+      isRead: false,
+      type: 'urgent',
+      value: 'Non diam phasellus vestibulum lorem sed risus ultricies. Tellus mauris a diam maecenas sed'
+    }
+  ];
+
+  const notifications = getAllNotificationsByUser(userId);
+  expect(notifications).toEqual(expect.arrayContaining(expectedNotifications));
+});
 
 
 test('verify normalized data result array', () => {
@@ -22,6 +44,7 @@ test('verify normalized data result array', () => {
   expect(normalizedData.result).toEqual(expect.arrayContaining(expectedResult));
 });
 
+
 test('verify normalized users entity', () => {
   const userId = '5debd764a7c57c7839d722e9';
   const expectedUser = {
@@ -34,6 +57,7 @@ test('verify normalized users entity', () => {
   expect(normalizedData.entities.users[userId]).toEqual(expectedUser);
 });
 
+
 test('verify normalized messages entity', () => {
   const messageId = 'efb6c485-00f7-4fdf-97cc-5e12d14d6c41';
   const expectedMessage = {
@@ -44,6 +68,7 @@ test('verify normalized messages entity', () => {
   };
   expect(normalizedData.entities.messages[messageId]).toEqual(expectedMessage);
 });
+
 
 test('verify normalized notifications entity', () => {
   const notificationId = '5debd7642e815cd350407777';
