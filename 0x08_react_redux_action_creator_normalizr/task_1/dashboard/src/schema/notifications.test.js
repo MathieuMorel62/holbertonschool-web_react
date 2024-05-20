@@ -1,6 +1,7 @@
 // src/schema/notifications.test.js
 import normalizedData from './notifications';
 
+
 test('verify normalized data result array', () => {
   const expectedResult = [
     "5debd76480edafc8af244228",
