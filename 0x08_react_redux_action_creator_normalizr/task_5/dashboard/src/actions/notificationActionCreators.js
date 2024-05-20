@@ -1,4 +1,5 @@
 import { MARK_AS_READ, SET_TYPE_FILTER } from "./notificationActionTypes";
+import { bindActionCreators } from 'redux'
 
 export const markAsRead = (index) => {
   return {
@@ -12,4 +13,12 @@ export const setNotificationFilter = (filter) => {
     type: SET_TYPE_FILTER,
     filter,
   }
+}
+
+export const boundMarkAsRead = (dispatch) => {
+  return bindActionCreators(markAsRead, dispatch);
+}
+
+export const boundSetNotificationFilter = (dispatch) => {
+  return bindActionCreators(setNotificationFilter, dispatch);
 }
