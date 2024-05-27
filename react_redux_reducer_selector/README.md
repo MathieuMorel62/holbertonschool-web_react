@@ -1,5 +1,7 @@
 # <p align="center">🌟 React Redux Reducer + Selector 🌟</p>
 
+![redux](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/aeab7cff-f98a-44b3-871e-e1250e75a64c)
+
 ## 📝 Description
 
 This project focuses on using Redux to manage the status in a React application. In particular, it explores the creation of reducers and selectors to effectively structure the state and allow optimized access to data. The project is divided into several stages, covering aspects such as the use of Immutable.js to ensure the immutability of the state, and the integration of Normalizr to standardize application data.
