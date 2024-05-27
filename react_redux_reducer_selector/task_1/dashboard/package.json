@@ -13,6 +13,7 @@
 		"fetch-mock": "^9.11.0",
 		"file-loader": "^6.2.0",
 		"image-webpack-loader": "^7.0.1",
+		"immutable": "^4.3.6",
 		"node-fetch": "^2.6.1",
 		"normalizr": "^3.6.2",
 		"react": "^17.0.2",
