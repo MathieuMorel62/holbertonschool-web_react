@@ -10,6 +10,8 @@ import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import BodySection from "../BodySection/BodySection";
 import { AppContext, defaultUser, defaultLogOut } from './AppContext';
+import { connect } from 'react-redux';
+
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -145,6 +147,7 @@ class App extends React.Component {
   }
 }
 
+
 App.propTypes = {
   logOut: PropTypes.func,
 };
@@ -153,4 +156,11 @@ App.defaultProps = {
   logOut: defaultLogOut,
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.get('isUserLoggedIn')
+  };
+};
+
+export { mapStateToProps };
+export default connect(mapStateToProps)(App);
