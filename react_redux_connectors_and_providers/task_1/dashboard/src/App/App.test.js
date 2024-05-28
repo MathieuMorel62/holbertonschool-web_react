@@ -14,7 +14,6 @@ import uiReducer from '../reducers/uiReducer';
 import { fromJS } from 'immutable';
 import { mapStateToProps } from './App';
 
-
 describe('App component', () => {
   let wrapper;
   let store;
@@ -54,24 +53,6 @@ describe('App component', () => {
 
   it('contains the Footer component', () => {
     expect(wrapper.find(Footer).exists()).toBe(true);
-  });
-
-  it('should have a default state for displayDrawer to false', () => {
-    const appInstance = wrapper.find(App).childAt(0).instance();
-    expect(appInstance.state.displayDrawer).toEqual(false);
-  });
-
-  it('should have a state for displayDrawer to true after handleDisplayDrawer call', () => {
-    const appInstance = wrapper.find(App).childAt(0).instance();
-    appInstance.handleDisplayDrawer();
-    expect(appInstance.state.displayDrawer).toEqual(true);
-  });
-
-  it('should have a state for displayDrawer to false after handleHideDrawer call', () => {
-    const appInstance = wrapper.find(App).childAt(0).instance();
-    appInstance.setState({ displayDrawer: true });
-    appInstance.handleHideDrawer();
-    expect(appInstance.state.displayDrawer).toEqual(false);
   });
 
   describe('when user is logged in', () => {
@@ -148,15 +129,32 @@ describe('App component', () => {
       { id: 3, html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' }, type: 'urgent' },
     ]);
   });
+  
+  it('displays the drawer when displayNotificationDrawer is called', () => {
+    store.dispatch({ type: 'DISPLAY_NOTIFICATION_DRAWER' });
+    wrapper.update();
+    const appInstance = wrapper.find(App).childAt(0).instance();
+    expect(appInstance.props.displayDrawer).toEqual(true);
+  });
+
+  it('hides the drawer when hideNotificationDrawer is called', () => {
+    store.dispatch({ type: 'DISPLAY_NOTIFICATION_DRAWER' });
+    store.dispatch({ type: 'HIDE_NOTIFICATION_DRAWER' });
+    wrapper.update();
+    const appInstance = wrapper.find(App).childAt(0).instance();
+    expect(appInstance.props.displayDrawer).toEqual(false);
+  });
 });
 
 describe('mapStateToProps', () => {
   it('should return the correct object', () => {
     let state = fromJS({
-      isUserLoggedIn: true
+      isUserLoggedIn: true,
+      isNotificationDrawerVisible: false
     });
     const expectedProps = {
-      isLoggedIn: true
+      isLoggedIn: true,
+      displayDrawer: false
     };
     expect(mapStateToProps(state)).toEqual(expectedProps);
   });
