@@ -19,8 +19,9 @@ export const hideNotificationDrawer = () => ({
   type: HIDE_NOTIFICATION_DRAWER
 });
 
-export const loginSuccess = () => ({
+export const loginSuccess = (user) => ({
   type: LOGIN_SUCCESS,
+  user,
 });
 
 export const loginFailure = () => ({
@@ -33,12 +34,14 @@ export const loginRequest = (email, password) => {
     try {
       const response = await fetch('/login-success.json');
       const data = await response.json();
-      dispatch(loginSuccess(data));
+      const userWithLoginStatus = { ...data, isLoggedIn: true };
+      dispatch(loginSuccess(userWithLoginStatus));
     } catch (error) {
       dispatch(loginFailure());
     }
   };
 };
+
 
 export const boundLogin = (dispatch) => {
   return bindActionCreators(login, dispatch);
