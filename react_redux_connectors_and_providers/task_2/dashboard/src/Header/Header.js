@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { css, StyleSheet } from "aphrodite";
 import logo from "../assets/holberton-logo.jpg";
-import { AppContext } from "../App/AppContext";
+import { connect } from 'react-redux';
+import { logout } from '../actions/uiActionCreators';
+import PropTypes from 'prop-types';
+import { defaultUser } from '../App/AppContext';
 
 const styles = StyleSheet.create({
   header: {
@@ -35,10 +38,8 @@ const styles = StyleSheet.create({
 });
 
 class Header extends Component {
-  static contextType = AppContext;
-
   render() {
-    const { user, logOut } = this.context;
+    const { user, logout } = this.props;
     return (
       <>
         <header className={css(styles.header)}>
@@ -47,7 +48,7 @@ class Header extends Component {
         </header>
         {user.isLoggedIn && (
           <section id="logoutSection">
-            <p className={css(styles.log)}>Welcome {user.email} (<a href="#logout" onClick={logOut}> logout </a>)</p>
+            <p className={css(styles.log)}>Welcome {user.email} (<a href="#logout" onClick={logout}> logout </a>)</p>
           </section>
         )}
         <hr className={css(styles.hr)} />
@@ -56,4 +57,25 @@ class Header extends Component {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+    isLoggedIn: PropTypes.bool,
+  }),
+  logout: PropTypes.func,
+};
+
+Header.defaultProps = {
+  user: defaultUser,
+  logout: () => {},
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.get('user') || defaultUser
+  };
+};
+
+export { Header };
+export default connect(mapStateToProps, { logout })(Header);
