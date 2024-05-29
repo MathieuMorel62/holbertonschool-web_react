@@ -9,7 +9,7 @@ describe('uiReducer', () => {
     expect(state.toJS()).toEqual({
       isNotificationDrawerVisible: false,
       isUserLoggedIn: false,
-      user: {}
+      user: null
     });
   });
 
@@ -18,7 +18,7 @@ describe('uiReducer', () => {
     expect(state.toJS()).toEqual({
       isNotificationDrawerVisible: false,
       isUserLoggedIn: false,
-      user: {}
+      user: null
     });
   });
 
@@ -27,7 +27,7 @@ describe('uiReducer', () => {
     expect(state.toJS()).toEqual({
       isNotificationDrawerVisible: true,
       isUserLoggedIn: false,
-      user: {}
+      user: null
     });
   });
 });
