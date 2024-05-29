@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { css, StyleSheet } from "aphrodite";
 import { getFullYear, getFooterCopy } from "../utils/utils";
-import { AppContext } from "../App/AppContext";
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { defaultUser } from '../App/AppContext';
 
 const styles = StyleSheet.create({
   p: {
@@ -20,10 +21,7 @@ const styles = StyleSheet.create({
   }
 });
 
-
-const Footer = () => {
-  const { user } = useContext(AppContext);
-
+export const Footer = ({ user = defaultUser }) => {
   return (
     <>
       <footer>
@@ -39,4 +37,22 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+Footer.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+    isLoggedIn: PropTypes.bool,
+  })
+};
+
+Footer.defaultProps = {
+  user: defaultUser,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.get('user') || defaultUser
+  };
+};
+
+export default connect(mapStateToProps)(Footer);
