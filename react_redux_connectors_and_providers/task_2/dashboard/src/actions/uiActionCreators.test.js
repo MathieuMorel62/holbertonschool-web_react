@@ -52,7 +52,13 @@ describe('loginRequest', () => {
 
     const expectedActions = [
       { type: LOGIN, user: { email: 'test@example.com', password: 'password123' } },
-      { type: LOGIN_SUCCESS }
+      { type: LOGIN_SUCCESS, user: {
+        email: "johann.salva@holberton.nz",
+        first_name: "Johann",
+        last_name: "Salva",
+        profile_picture: "http://placehold.it/32x32",
+        isLoggedIn: true
+      }}
     ];
 
     const store = mockStore({});
