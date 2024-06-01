@@ -5,23 +5,16 @@ import PropTypes from "prop-types";
 import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
 import { fetchNotifications, markAsRead } from '../actions/notificationActionCreators';
+import { getUnreadNotifications } from '../selectors/notificationSelector';
 
 const opacityFrames = {
-  'from': {
-    opacity: 0.5,
-  },
-  'to': {
-    opacity: 1,
-  }
+  'from': { opacity: 0.5 },
+  'to': { opacity: 1 }
 };
 
 const bounceFrames = {
-  '0%': {
-    transform: 'translateY(0px)',
-  },
-  '100%': {
-    transform: 'translateY(5px)',
-  }
+  '0%': { transform: 'translateY(0px)' },
+  '100%': { transform: 'translateY(5px)' }
 };
 
 const styles = StyleSheet.create({
@@ -69,13 +62,9 @@ const styles = StyleSheet.create({
   notificationList: {
     padding: 0,
     marginLeft: 10,
-    "@media (max-width: 900px)": {
-      marginLeft: 0,
-    }
+    "@media (max-width: 900px)": { marginLeft: 0 }
   },
-  notificationListItem: {
-    fontSize: "20px",
-  },
+  notificationListItem: { fontSize: "20px" },
 });
 
 class Notifications extends PureComponent {
@@ -85,7 +74,6 @@ class Notifications extends PureComponent {
 
   render() {
     const { displayDrawer, listNotifications = [], handleDisplayDrawer, handleHideDrawer, markAsRead } = this.props;
-
     const menuItemClass = listNotifications.length > this.props.listNotifications.length 
                           ? css(styles.menuItem, styles.menuItemActive)
                           : css(styles.menuItem);
@@ -111,11 +99,7 @@ class Notifications extends PureComponent {
               aria-label="Close"
               onClick={handleHideDrawer}
             >
-              <img
-                src={closeIcon}
-                alt="close button"
-                style={{ width: "12px", height: "12px" }}
-              />
+              <img src={closeIcon} alt="close button" style={{ width: "12px", height: "12px" }} />
             </button>
             <p className={css(styles.notificationListItem)}>Here is the list of notifications</p>
             <ul className={css(styles.notificationList)}>
@@ -178,7 +162,7 @@ Notifications.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    listNotifications: state.getIn(['notifications', 'notifications']).toJS(),
+    listNotifications: getUnreadNotifications(state),
   };
 };
 
