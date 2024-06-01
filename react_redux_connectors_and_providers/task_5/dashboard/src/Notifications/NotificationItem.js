@@ -32,26 +32,27 @@ function NotificationItem({ type, html, value, markAsRead, id }) {
   const style = type === "urgent" ? styles.urgent : styles.default;
   return (
     <>
-      <li className={css(style)} data-notification-type={type} onClick={() => markAsRead(id)}>
+      <li className={css(style)} data-notification-type={type} onClick={() => markAsRead(id)} >
         {html ? (
           <span dangerouslySetInnerHTML={html} />
-        ) : value}
+        ) : (
+          value
+        )}
       </li>
     </>
   );
 }
-
 
 NotificationItem.propTypes = {
   type: PropTypes.string.isRequired,
   html: PropTypes.shape({ __html: PropTypes.string }),
   value: PropTypes.string,
   markAsRead: PropTypes.func,
-  id: PropTypes.number,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 NotificationItem.defaultProps = {
-  markAsRead: () => {}
+  markAsRead: () => {},
 };
 
 export default React.memo(NotificationItem);
