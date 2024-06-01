@@ -6,7 +6,6 @@ import Login from "../Login/Login";
 import Header from "../Header/Header";
 import CourseList from "../CourseList/CourseList";
 import Footer from "../Footer/Footer";
-import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import BodySection from "../BodySection/BodySection";
 import { AppContext, defaultUser, defaultLogOut } from './AppContext';
@@ -17,12 +16,6 @@ const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
   { id: 2, name: 'Webpack', credit: 20 },
   { id: 3, name: 'React', credit: 40 }
-];
-
-const initialNotifications = [
-  { id: 1, value: 'New course available', type: 'default' },
-  { id: 2, value: 'New resume available', type: 'urgent' },
-  { id: 3, html: { __html: getLatestNotification() }, type: 'urgent' },
 ];
 
 const style = StyleSheet.create({
@@ -48,12 +41,7 @@ const style = StyleSheet.create({
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      listNotifications: initialNotifications,
-    };
-
     this.handleKey = this.handleKey.bind(this);
-    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   componentDidMount() {
@@ -71,25 +59,16 @@ class App extends React.Component {
     }
   }
 
-  markNotificationAsRead(id) {
-    this.setState({
-      listNotifications: this.state.listNotifications.filter(notification => notification.id !== id)
-    });
-  }
-
   render() {
-    const { listNotifications } = this.state;
     const { user, isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer, login } = this.props;
 
     return (
       <AppContext.Provider value={{ user, logout: this.props.logout }}>
         <>
           <Notifications
-            listNotifications={listNotifications}
             displayDrawer={displayDrawer}
             handleDisplayDrawer={displayNotificationDrawer}
             handleHideDrawer={hideNotificationDrawer}
-            markNotificationAsRead={this.markNotificationAsRead}
           />
           <div className={css(style.app)}>
             <Header />
@@ -141,14 +120,13 @@ App.defaultProps = {
   user: defaultUser,
 };
 
-export const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.getIn(['ui', 'isUserLoggedIn']),
     displayDrawer: state.getIn(['ui', 'isNotificationDrawerVisible']),
     user: state.getIn(['ui', 'user']) || defaultUser,
   };
 };
-
 
 const mapDispatchToProps = {
   displayNotificationDrawer,
@@ -157,5 +135,5 @@ const mapDispatchToProps = {
   logout,
 };
 
-export { App };
+export { App, mapStateToProps };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
