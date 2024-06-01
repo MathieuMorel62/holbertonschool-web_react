@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 import rootReducer from './rootReducer';
 
 describe('rootReducer', () => {
@@ -7,8 +7,9 @@ describe('rootReducer', () => {
     const expectedState = Map({
       courses: Map(),
       notifications: Map({
-        notifications: Map(),
+        notifications: List(),
         filter: 'DEFAULT',
+        loading: false,
       }),
       ui: Map({
         isNotificationDrawerVisible: false,
