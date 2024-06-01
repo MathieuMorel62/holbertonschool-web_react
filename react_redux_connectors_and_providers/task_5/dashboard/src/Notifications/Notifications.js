@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, css } from "aphrodite";
+import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
-import PropTypes from "prop-types";
-import NotificationItemShape from "./NotificationItemShape";
+import { fetchNotifications, markAsRead } from '../actions/notificationActionCreators';
 
 const opacityFrames = {
   'from': {
@@ -78,12 +79,17 @@ const styles = StyleSheet.create({
 });
 
 class Notifications extends PureComponent {
+  componentDidMount() {
+    this.props.fetchNotifications();
+  }
+
   render() {
-    const { displayDrawer, listNotifications = [], handleDisplayDrawer, handleHideDrawer, markNotificationAsRead } = this.props;
+    const { displayDrawer, listNotifications = [], handleDisplayDrawer, handleHideDrawer, markAsRead } = this.props;
+
     const menuItemClass = listNotifications.length > this.props.listNotifications.length 
                           ? css(styles.menuItem, styles.menuItemActive)
                           : css(styles.menuItem);
-    
+
     return (
       <>
         {!displayDrawer && (
@@ -114,16 +120,21 @@ class Notifications extends PureComponent {
             <p className={css(styles.notificationListItem)}>Here is the list of notifications</p>
             <ul className={css(styles.notificationList)}>
               {listNotifications.length > 0 ? (
-                listNotifications.map((notification) => (
-                  <NotificationItem
-                    key={notification.id}
-                    type={notification.type}
-                    value={notification.value}
-                    html={notification.html}
-                    markAsRead={() => markNotificationAsRead(notification.id)}
-                    id={notification.id}
-                  />
-                ))
+                listNotifications.map((notification) => {
+                  const { id, type, context, html } = notification;
+                  const value = context && context.value ? context.value : null;
+                  const contextType = context && context.type ? context.type : type;
+                  return (
+                    <NotificationItem
+                      key={id}
+                      type={contextType}
+                      value={value}
+                      html={html ? { __html: html.__html } : undefined}
+                      markAsRead={() => markAsRead(id)}
+                      id={id}
+                    />
+                  );
+                })
               ) : (
                 <li>No new notification for now</li>
               )}
@@ -139,8 +150,21 @@ Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   handleDisplayDrawer: PropTypes.func,
   handleHideDrawer: PropTypes.func,
-  listNotifications: PropTypes.arrayOf(NotificationItemShape),
-  markNotificationAsRead: PropTypes.func,
+  listNotifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      type: PropTypes.string.isRequired,
+      context: PropTypes.shape({
+        guid: PropTypes.string,
+        isRead: PropTypes.bool,
+        type: PropTypes.string,
+        value: PropTypes.string,
+        html: PropTypes.shape({ __html: PropTypes.string })
+      })
+    })
+  ),
+  markAsRead: PropTypes.func,
+  fetchNotifications: PropTypes.func,
 };
 
 Notifications.defaultProps = {
@@ -148,7 +172,19 @@ Notifications.defaultProps = {
   handleDisplayDrawer: () => {},
   handleHideDrawer: () => {},
   listNotifications: [],
-  markNotificationAsRead: () => {},
+  markAsRead: () => {},
+  fetchNotifications: () => {},
 };
 
-export default Notifications;
+const mapStateToProps = (state) => {
+  return {
+    listNotifications: state.getIn(['notifications', 'notifications']).toJS(),
+  };
+};
+
+const mapDispatchToProps = {
+  fetchNotifications,
+  markAsRead,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
