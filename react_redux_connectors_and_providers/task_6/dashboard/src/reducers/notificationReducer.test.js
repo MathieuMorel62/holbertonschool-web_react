@@ -37,11 +37,11 @@ describe('notificationReducer', () => {
       filter: 'DEFAULT',
       loading: false,
     });
-    const state = notificationReducer(initialState, { type: MARK_AS_READ, index: 1 });
+    const state = notificationReducer(initialState, { type: MARK_AS_READ, id: 1 });
     const expectedState = initialState.setIn(['notifications', 0, 'isRead'], true);
     expect(state).toEqual(expectedState);
   });
-  
+
   it('should handle SET_TYPE_FILTER action', () => {
     const state = notificationReducer(undefined, { type: SET_TYPE_FILTER, filter: 'URGENT' });
     const expectedState = fromJS({
