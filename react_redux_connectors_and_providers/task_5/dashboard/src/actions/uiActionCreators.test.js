@@ -1,11 +1,16 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import fetchMock from 'fetch-mock';
 import { login, logout, displayNotificationDrawer, hideNotificationDrawer, loginRequest } from './uiActionCreators';
 import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_SUCCESS, LOGIN_FAILURE } from './uiActionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+
+global.fetch = jest.fn();
+
+afterEach(() => {
+  fetch.mockClear();
+});
 
 test('login action creator returns correct action', () => {
   const email = 'test@example.com';
@@ -38,16 +43,18 @@ test('hideNotificationDrawer action creator returns correct action', () => {
   expect(hideNotificationDrawer()).toEqual(expectedAction);
 });
 
-
 describe('loginRequest', () => {
-  afterEach(() => {
-    fetchMock.restore();
-  });
+  it('creates LOGIN and LOGIN_SUCCESS when loginRequest is successful', async () => {
+    const mockResponse = {
+      first_name: "Johann",
+      last_name: "Salva",
+      email: "johann.salva@holberton.nz",
+      profile_picture: "http://placehold.it/32x32"
+    };
 
-  it('creates LOGIN and LOGIN_SUCCESS when loginRequest is successful', () => {
-    fetchMock.getOnce('/login-success.json', {
-      body: { first_name: "Johann", last_name: "Salva", email: "johann.salva@holberton.nz", profile_picture: "http://placehold.it/32x32" },
-      headers: { 'content-type': 'application/json' }
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse,
     });
 
     const expectedActions = [
@@ -63,13 +70,15 @@ describe('loginRequest', () => {
 
     const store = mockStore({});
 
-    return store.dispatch(loginRequest('test@example.com', 'password123')).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
+    await store.dispatch(loginRequest('test@example.com', 'password123'));
+
+    expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('creates LOGIN and LOGIN_FAILURE when loginRequest fails', () => {
-    fetchMock.getOnce('/login-success.json', 500);
+  it('creates LOGIN and LOGIN_FAILURE when loginRequest fails', async () => {
+    fetch.mockResolvedValueOnce({
+      ok: false,
+    });
 
     const expectedActions = [
       { type: LOGIN, user: { email: 'test@example.com', password: 'password123' } },
@@ -78,8 +87,8 @@ describe('loginRequest', () => {
 
     const store = mockStore({});
 
-    return store.dispatch(loginRequest('test@example.com', 'password123')).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
+    await store.dispatch(loginRequest('test@example.com', 'password123'));
+
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });
