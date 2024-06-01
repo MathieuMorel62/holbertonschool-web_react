@@ -6,3 +6,4 @@ export const NotificationTypeFilters = {
   URGENT: 'URGENT',
 }
 export const FETCH_NOTIFICATIONS_SUCCESS = 'FETCH_NOTIFICATIONS_SUCCESS';
+export const SET_LOADING_STATE = 'SET_LOADING_STATE';
