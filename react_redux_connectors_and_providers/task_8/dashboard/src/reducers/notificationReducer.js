@@ -17,7 +17,7 @@ function notificationReducer(state = initialState, action) {
     case MARK_AS_READ: {
       const index = state.get('notifications').findIndex((notification) => notification.get('id') === action.id);
       if (index !== -1) {
-        return state.setIn(['notifications', index, 'isRead'], true);
+        return state.setIn(['notifications', index, 'context', 'isRead'], true);
       }
       return state;
     }
@@ -28,7 +28,10 @@ function notificationReducer(state = initialState, action) {
     case FETCH_NOTIFICATIONS_SUCCESS:
       return state.set('notifications', fromJS(action.data.map(notification => ({
         ...notification,
-        isRead: false
+        context: {
+          ...notification.context,
+          isRead: false
+        }
       }))));
     default:
       return state;
