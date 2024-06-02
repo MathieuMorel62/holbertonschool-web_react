@@ -16,10 +16,10 @@ import {
   NotificationTypeFilters
 } from './notificationActionTypes';
 
-// Configure fetch mock
+
 fetchMock.enableMocks();
 
-// Création du mock store
+
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
@@ -37,7 +37,7 @@ test('setLoadingState action creator returns correct action', () => {
 });
 
 test('setNotifications action creator returns correct action', () => {
-  const data = [{ id: 1, type: 'default', value: 'New course available' }];
+  const data = [{ id: 1, type: 'default', context: { value: 'New course available', isRead: false } }];
   const expectedAction = {
     type: FETCH_NOTIFICATIONS_SUCCESS,
     data,
@@ -46,7 +46,7 @@ test('setNotifications action creator returns correct action', () => {
 });
 
 test('fetchNotifications dispatches the correct actions', async () => {
-  const mockData = [{ id: 1, type: 'default', value: 'New course available' }];
+  const mockData = [{ id: 1, type: 'default', context: { value: 'New course available', isRead: false } }];
   fetchMock.mockResponseOnce(JSON.stringify(mockData));
 
   const expectedActions = [
