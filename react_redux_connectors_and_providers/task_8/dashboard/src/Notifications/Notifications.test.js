@@ -1,15 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
-import configureStore from 'redux-mock-store';
+import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { fromJS } from 'immutable';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
-import { markAsRead } from '../actions/notificationActionCreators';
+import { markAsRead, setNotificationFilter } from '../actions/notificationActionCreators';
 
 const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
+const mockStore = configureMockStore(middlewares);
 
 const initialState = fromJS({
   notifications: {
@@ -31,6 +31,10 @@ jest.mock('../actions/notificationActionCreators', () => ({
   markAsRead: jest.fn((id) => ({
     type: 'MARK_AS_READ',
     id,
+  })),
+  setNotificationFilter: jest.fn((filter) => ({
+    type: 'SET_TYPE_FILTER',
+    filter,
   })),
 }));
 
@@ -80,9 +84,9 @@ describe('<Notifications />', () => {
     const dataStore = mockStore(fromJS({
       notifications: {
         notifications: [
-          { id: 1, type: 'default', context: { value: 'New course available' } },
-          { id: 2, type: 'urgent', context: { value: 'New resume available' } },
-          { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } },
+          { id: 1, type: 'default', context: { value: 'New course available', isRead: false } },
+          { id: 2, type: 'urgent', context: { value: 'New resume available', isRead: false } },
+          { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' }, context: { isRead: false } },
         ]
       }
     }));
@@ -103,9 +107,9 @@ describe('<Notifications />', () => {
     const dataStore = mockStore(fromJS({
       notifications: {
         notifications: [
-          { id: 1, type: 'default', context: { value: 'New course available' } },
-          { id: 2, type: 'urgent', context: { value: 'New resume available' } },
-          { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } },
+          { id: 1, type: 'default', context: { value: 'New course available', isRead: false } },
+          { id: 2, type: 'urgent', context: { value: 'New resume available', isRead: false } },
+          { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' }, context: { isRead: false } },
         ]
       }
     }));
@@ -190,8 +194,8 @@ describe('<Notifications />', () => {
     const initialProps = {
       displayDrawer: true,
       listNotifications: [
-        { id: 1, type: 'default', context: { value: 'New course available' } },
-        { id: 2, type: 'urgent', context: { value: 'New resume available' } },
+        { id: 1, type: 'default', context: { value: 'New course available', isRead: false } },
+        { id: 2, type: 'urgent', context: { value: 'New resume available', isRead: false } },
       ],
       handleDisplayDrawer: mockHandleDisplayDrawer,
       handleHideDrawer: mockHandleHideDrawer
@@ -201,5 +205,29 @@ describe('<Notifications />', () => {
     const spy = jest.spyOn(wrapper.find('Notifications').instance(), 'render');
     wrapper.setProps({ listNotifications: initialProps.listNotifications });
     expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('calls setNotificationFilter with URGENT when the "‼️" button is clicked', () => {
+    wrapper = createWrapper(store, {
+      displayDrawer: true,
+      handleDisplayDrawer: mockHandleDisplayDrawer,
+      handleHideDrawer: mockHandleHideDrawer,
+      setNotificationFilter: setNotificationFilter,
+    });
+
+    wrapper.find('[data-test="urgent-button"]').simulate('click');
+    expect(setNotificationFilter).toHaveBeenCalledWith('URGENT');
+  });
+
+  it('calls setNotificationFilter with DEFAULT when the "?" button is clicked', () => {
+    wrapper = createWrapper(store, {
+      displayDrawer: true,
+      handleDisplayDrawer: mockHandleDisplayDrawer,
+      handleHideDrawer: mockHandleHideDrawer,
+      setNotificationFilter: setNotificationFilter,
+    });
+
+    wrapper.find('[data-test="default-button"]').simulate('click');
+    expect(setNotificationFilter).toHaveBeenCalledWith('DEFAULT');
   });
 });
