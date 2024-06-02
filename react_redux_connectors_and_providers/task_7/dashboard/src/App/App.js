@@ -127,7 +127,7 @@ const mapStateToProps = (state) => {
     isLoggedIn: state.getIn(['ui', 'isUserLoggedIn']),
     displayDrawer: state.getIn(['ui', 'isNotificationDrawerVisible']),
     user: state.getIn(['ui', 'user']) || defaultUser,
-    listCourses: getCourses(state),
+    listCourses: getCourses(state).toJS(),
   };
 };
 
