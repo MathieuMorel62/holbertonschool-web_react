@@ -5,7 +5,6 @@ import {
   FETCH_NOTIFICATIONS_SUCCESS
 } from './notificationActionTypes';
 
-
 export const markAsRead = (id) => ({
   type: MARK_AS_READ,
   id,
@@ -26,7 +25,7 @@ export const setNotificationFilter = (filter) => ({
 export const setNotifications = (data) => {
   const sanitizedData = data.map(notification => ({
     ...notification,
-    type: notification.type || 'default',
+    type: notification.context.type || 'default',
   }));
   
   return {
