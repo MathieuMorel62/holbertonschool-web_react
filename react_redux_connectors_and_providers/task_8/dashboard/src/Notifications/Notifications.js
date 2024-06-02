@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
-import { fetchNotifications, markAsRead } from '../actions/notificationActionCreators';
-import { getUnreadNotifications } from '../selectors/notificationSelector';
+import { fetchNotifications, markAsRead, setNotificationFilter } from '../actions/notificationActionCreators';
+import { getUnreadNotificationsByType } from '../selectors/notificationSelector';
 
 const opacityFrames = {
   'from': { opacity: 0.5 },
@@ -65,6 +65,20 @@ const styles = StyleSheet.create({
     "@media (max-width: 900px)": { marginLeft: 0 }
   },
   notificationListItem: { fontSize: "20px" },
+  buttonContainer: {
+    marginTop: "10px",
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  button: {
+    padding: "10px 20px",
+    cursor: "pointer",
+    border: "none",
+    backgroundColor: "#e11d3f",
+    color: "white",
+    fontSize: "16px",
+    borderRadius: "5px",
+  }
 });
 
 class Notifications extends PureComponent {
@@ -72,8 +86,13 @@ class Notifications extends PureComponent {
     this.props.fetchNotifications();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.filter !== this.props.filter) {
+    }
+  }
+
   render() {
-    const { displayDrawer, listNotifications = [], handleDisplayDrawer, handleHideDrawer, markAsRead } = this.props;
+    const { displayDrawer, listNotifications = [], handleDisplayDrawer, handleHideDrawer, markAsRead, setNotificationFilter, filter } = this.props;
     const menuItemClass = listNotifications.length > this.props.listNotifications.length 
                           ? css(styles.menuItem, styles.menuItemActive)
                           : css(styles.menuItem);
@@ -102,12 +121,16 @@ class Notifications extends PureComponent {
               <img src={closeIcon} alt="close button" style={{ width: "12px", height: "12px" }} />
             </button>
             <p className={css(styles.notificationListItem)}>Here is the list of notifications</p>
+            <div className={css(styles.buttonContainer)}>
+              <button data-test="urgent-button" className={css(styles.button)} onClick={() => setNotificationFilter('URGENT')}>‼️</button>
+              <button data-test="default-button" className={css(styles.button)} onClick={() => setNotificationFilter('DEFAULT')}>?</button>
+            </div>
             <ul className={css(styles.notificationList)}>
               {listNotifications.length > 0 ? (
                 listNotifications.map((notification) => {
-                  const { id, type, context, html } = notification;
+                  const { id, context, html } = notification;
                   const value = context && context.value ? context.value : null;
-                  const contextType = context && context.type ? context.type : type;
+                  const contextType = context && context.type ? context.type : 'default';
                   return (
                     <NotificationItem
                       key={id}
@@ -137,7 +160,6 @@ Notifications.propTypes = {
   listNotifications: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      type: PropTypes.string.isRequired,
       context: PropTypes.shape({
         guid: PropTypes.string,
         isRead: PropTypes.bool,
@@ -149,6 +171,8 @@ Notifications.propTypes = {
   ),
   markAsRead: PropTypes.func,
   fetchNotifications: PropTypes.func,
+  setNotificationFilter: PropTypes.func,
+  filter: PropTypes.string,
 };
 
 Notifications.defaultProps = {
@@ -158,17 +182,21 @@ Notifications.defaultProps = {
   listNotifications: [],
   markAsRead: () => {},
   fetchNotifications: () => {},
+  setNotificationFilter: () => {},
+  filter: 'DEFAULT',
 };
 
 const mapStateToProps = (state) => {
   return {
-    listNotifications: getUnreadNotifications(state),
+    listNotifications: getUnreadNotificationsByType(state),
+    filter: state.getIn(['notifications', 'filter']),
   };
 };
 
 const mapDispatchToProps = {
   fetchNotifications,
   markAsRead,
+  setNotificationFilter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
