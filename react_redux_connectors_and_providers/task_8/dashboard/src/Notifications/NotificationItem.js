@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
       padding: "10px 8px",
     },
   },
-
   urgent: {
     color: "red",
     cursor: "pointer",
