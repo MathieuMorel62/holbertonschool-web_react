@@ -9,9 +9,11 @@ import { defaultUser } from '../App/AppContext';
 const styles = StyleSheet.create({
   header: {
     display: 'flex',
-    alignItems: 'center',
+    flexDirection:'column',
+    alignItems: 'left',
     color: '#e11d3f',
     fontFamily: '"Times New Roman", Times, serif',
+    whiteSpace: 'nowrap'
   },
   h1: {
     margin: '0px',
@@ -21,6 +23,7 @@ const styles = StyleSheet.create({
   },
   img: {
     maxHeight: '260px',
+    width: '260px',
     marginRight: '1rem',
   },
   hr: {
@@ -28,11 +31,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     height: '0.1rem',
     minWidth: '100%',
+    zIndex: '1',
   },
   log: {
     position: 'absolute',
     right: '22px',
-    top: '14rem',
+    top: '21rem',
     fontSize: '20px',
   },
 });
@@ -46,12 +50,12 @@ class Header extends Component {
           <img src={logo} className={css(styles.img)} alt="Holberton Logo" />
           <h1 className={css(styles.h1)}>School dashboard</h1>
         </header>
+          <hr className={css(styles.hr)} />
         {user.isLoggedIn && (
           <section id="logoutSection">
             <p className={css(styles.log)}>Welcome {user.email} (<a href="#logout" onClick={logout}> logout </a>)</p>
           </section>
         )}
-        <hr className={css(styles.hr)} />
       </>
     );
   }
