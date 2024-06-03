@@ -1,4 +1,4 @@
-import { Map, fromJS } from 'immutable';
+import { fromJS } from 'immutable';
 import {
   MARK_AS_READ,
   SET_TYPE_FILTER,
