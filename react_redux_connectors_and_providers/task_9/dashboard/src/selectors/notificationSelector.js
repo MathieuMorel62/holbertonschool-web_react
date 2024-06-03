@@ -10,6 +10,7 @@ export const getNotifications = (state) => state.getIn(['notifications', 'notifi
 export const getUnreadNotificationsByType = createSelector(
   [filterTypeSelected, getNotifications],
   (filter, notifications) => {
+
     const unreadNotifications = notifications.toJS().filter(notification => notification.context && !notification.context.isRead);
 
     if (filter === 'URGENT') {
