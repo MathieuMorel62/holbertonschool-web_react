@@ -1,11 +1,8 @@
-import React, { PureComponent } from "react";
-import { StyleSheet, css } from "aphrodite";
-import { connect } from 'react-redux';
+import React from "react";
 import PropTypes from "prop-types";
+import { StyleSheet, css } from "aphrodite";
 import closeIcon from "../assets/close-icon.png";
 import NotificationItem from "./NotificationItem";
-import { fetchNotifications, markAsRead, setNotificationFilter } from '../actions/notificationActionCreators';
-import { getUnreadNotificationsByType } from '../selectors/notificationSelector';
 
 const opacityFrames = {
   'from': { opacity: 0.5 },
@@ -84,77 +81,63 @@ const styles = StyleSheet.create({
   }
 });
 
-class Notifications extends PureComponent {
-  componentDidMount() {
-    this.props.fetchNotifications();
-  }
+const Notifications = ({ displayDrawer, listNotifications = [], handleDisplayDrawer, handleHideDrawer, markAsRead, setNotificationFilter, filter }) => {
+  const menuItemClass = listNotifications.length > 0 ? css(styles.menuItem, styles.menuItemActive) : css(styles.menuItem);
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.filter !== this.props.filter) {
-    }
-  }
-
-  render() {
-    const { displayDrawer, listNotifications = [], handleDisplayDrawer, handleHideDrawer, markAsRead, setNotificationFilter, filter } = this.props;
-    const menuItemClass = listNotifications.length > this.props.listNotifications.length 
-                          ? css(styles.menuItem, styles.menuItemActive)
-                          : css(styles.menuItem);
-
-    return (
-      <>
-        {!displayDrawer && (
-          <div className={menuItemClass} data-test="menuItem" onClick={handleDisplayDrawer}>
-            <p>Your notifications</p>
+  return (
+    <>
+      {!displayDrawer && (
+        <div className={menuItemClass} data-test="menuItem" onClick={() => { handleDisplayDrawer(); }}>
+          <p>Your notifications</p>
+        </div>
+      )}
+      {displayDrawer && (
+        <div className={css(styles.notifications)} data-test="notifications">
+          <button
+            style={{
+              float: "right",
+              top: "20px",
+              right: "20px",
+              border: "none",
+              background: "transparent",
+              cursor: "pointer",
+            }}
+            aria-label="Close"
+            onClick={() => { handleHideDrawer(); }}
+          >
+            <img src={closeIcon} alt="close button" style={{ width: "12px", height: "12px" }} />
+          </button>
+          <p className={css(styles.notificationListItem)}>Here is the list of notifications</p>
+          <div className={css(styles.buttonContainer)}>
+            <button data-test="urgent-button" className={css(styles.button)} onClick={() => setNotificationFilter('URGENT')}>‼️</button>
+            <button data-test="default-button" className={css(styles.button)} onClick={() => setNotificationFilter('DEFAULT')}>?</button>
           </div>
-        )}
-        {displayDrawer && (
-          <div className={css(styles.notifications)} data-test="notifications">
-            <button
-              style={{
-                float: "right",
-                top: "20px",
-                right: "20px",
-                border: "none",
-                background: "transparent",
-                cursor: "pointer",
-              }}
-              aria-label="Close"
-              onClick={handleHideDrawer}
-            >
-              <img src={closeIcon} alt="close button" style={{ width: "12px", height: "12px" }} />
-            </button>
-            <p className={css(styles.notificationListItem)}>Here is the list of notifications</p>
-            <div className={css(styles.buttonContainer)}>
-              <button data-test="urgent-button" className={css(styles.button)} onClick={() => setNotificationFilter('URGENT')}>‼️</button>
-              <button data-test="default-button" className={css(styles.button)} onClick={() => setNotificationFilter('DEFAULT')}>?</button>
-            </div>
-            <ul className={css(styles.notificationList)}>
-              {listNotifications.length > 0 ? (
-                listNotifications.map((notification) => {
-                  const { id, context, html } = notification;
-                  const value = context && context.value ? context.value : null;
-                  const contextType = context && context.type ? context.type : 'default';
-                  return (
-                    <NotificationItem
-                      key={id}
-                      type={contextType}
-                      value={value}
-                      html={html ? { __html: html.__html } : undefined}
-                      markAsRead={() => markAsRead(id)}
-                      id={id}
-                    />
-                  );
-                })
-              ) : (
-                <li>No new notification for now</li>
-              )}
-            </ul>
-          </div>
-        )}
-      </>
-    );
-  }
-}
+          <ul className={css(styles.notificationList)}>
+            {listNotifications.length > 0 ? (
+              listNotifications.map((notification) => {
+                const { id, context, html } = notification;
+                const value = context && context.value ? context.value : null;
+                const contextType = context && context.type ? context.type : 'default';
+                return (
+                  <NotificationItem
+                    key={id}
+                    type={contextType}
+                    value={value}
+                    html={html ? { __html: html.__html } : undefined}
+                    markAsRead={() => markAsRead(id)}
+                    id={id}
+                  />
+                );
+              })
+            ) : (
+              <li>No new notification for now</li>
+            )}
+          </ul>
+        </div>
+      )}
+    </>
+  );
+};
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
@@ -173,7 +156,6 @@ Notifications.propTypes = {
     })
   ),
   markAsRead: PropTypes.func,
-  fetchNotifications: PropTypes.func,
   setNotificationFilter: PropTypes.func,
   filter: PropTypes.string,
 };
@@ -184,22 +166,8 @@ Notifications.defaultProps = {
   handleHideDrawer: () => {},
   listNotifications: [],
   markAsRead: () => {},
-  fetchNotifications: () => {},
   setNotificationFilter: () => {},
   filter: 'DEFAULT',
 };
 
-const mapStateToProps = (state) => {
-  return {
-    listNotifications: getUnreadNotificationsByType(state),
-    filter: state.getIn(['notifications', 'filter']),
-  };
-};
-
-const mapDispatchToProps = {
-  fetchNotifications,
-  markAsRead,
-  setNotificationFilter,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
+export default Notifications;
