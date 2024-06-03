@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
-import Notifications from "../Notifications/Notifications";
+import NotificationsContainer from "../Notifications/NotificationsContainer";
 import Login from "../Login/Login";
 import Header from "../Header/Header";
 import CourseList from "../CourseList/CourseList";
@@ -12,7 +12,6 @@ import { AppContext, defaultUser, defaultLogOut } from './AppContext';
 import { connect } from 'react-redux';
 import { displayNotificationDrawer, hideNotificationDrawer, loginRequest, logout } from '../actions/uiActionCreators';
 import { getCourses } from '../selectors/courseSelector';
-
 
 const style = StyleSheet.create({
   app: {
@@ -61,10 +60,10 @@ class App extends React.Component {
     return (
       <AppContext.Provider value={{ user, logout: this.props.logout }}>
         <>
-          <Notifications
-            displayDrawer={displayDrawer}
-            handleDisplayDrawer={displayNotificationDrawer}
-            handleHideDrawer={hideNotificationDrawer}
+          <NotificationsContainer 
+            displayDrawer={displayDrawer} 
+            handleDisplayDrawer={displayNotificationDrawer} 
+            handleHideDrawer={hideNotificationDrawer} 
           />
           <div className={css(style.app)}>
             <Header />
