@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
 export const Footer = ({ user = defaultUser }) => {
   return (
     <>
-      <footer>
       <hr className={css(styles.hr)} />
+      <footer>
         <p className={css(styles.p)}>Copyright {getFullYear()} - {getFooterCopy(true)}</p>
         {user.isLoggedIn &&  (
           <p>
