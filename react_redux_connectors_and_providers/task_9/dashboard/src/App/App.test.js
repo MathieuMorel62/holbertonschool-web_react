@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import { App, mapStateToProps } from './App';
-import Notifications from '../Notifications/Notifications';
+import NotificationsContainer from '../Notifications/NotificationsContainer'; // Changez cette ligne
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
@@ -42,8 +42,8 @@ describe('App component', () => {
     StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
-  it('contains the Notifications component', () => {
-    expect(wrapper.find(Notifications).exists()).toBe(true);
+  it('contains the NotificationsContainer component', () => {
+    expect(wrapper.find(NotificationsContainer).exists()).toBe(true); // Changez cette ligne
   });
 
   it('contains the Header component', () => {
