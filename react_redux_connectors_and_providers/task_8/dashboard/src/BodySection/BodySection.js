@@ -5,9 +5,10 @@ import { css, StyleSheet } from 'aphrodite';
 
 const styles = StyleSheet.create({
   bodySection: {
-    marginTop: '90px',
+    marginTop: '59px',
     marginLeft: '20px',
     fontSize: '1.1rem',
+    whiteSpace: 'nowrap'
   }
 });
 
