@@ -7,7 +7,7 @@ import App from "./App/App";
 import rootReducer from "./reducers/rootReducer";
 import { Map } from 'immutable';
 
-// Configuration de Redux DevTools
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = Map();
 const store = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(thunk)));
