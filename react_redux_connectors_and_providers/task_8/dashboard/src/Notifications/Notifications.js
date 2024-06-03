@@ -24,8 +24,11 @@ const styles = StyleSheet.create({
     fontFamily: "Times New Roman, Times, serif",
     width: "35%",
     float: "right",
-    fontSize: "20px",
+    fontSize: "17px",
+    position: "absolute",
+    right: 5,
     backgroundColor: "#fff8f8",
+    zIndex: 1,
     "@media (max-width: 900px)": {
       width: "100%",
       height: "100vh",
