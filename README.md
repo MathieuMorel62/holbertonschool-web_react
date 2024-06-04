@@ -1,4 +1,4 @@
-# 🌟 Holberton School Web React 🌟
+# <p align="center">🌟 Holberton School Web React 🌟</p>
 
 ![react-web](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/324754c1-38df-41ce-b07e-82706bb60249)
 
