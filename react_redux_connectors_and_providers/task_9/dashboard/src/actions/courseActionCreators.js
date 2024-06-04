@@ -1,8 +1,8 @@
-// actions/courseActionCreators.js
 import { FETCH_COURSE_SUCCESS, SELECT_COURSE, UNSELECT_COURSE } from "./courseActionTypes";
 import fetch from 'isomorphic-fetch';
 
-export const fetchCourses = (url = 'http://localhost:8564/courses.json') => {
+
+export const fetchCourses = (url = '/courses.json') => {
   return async (dispatch) => {
     const response = await fetch(url);
     const data = await response.json();
