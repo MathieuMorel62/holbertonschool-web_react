@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const Notifications = ({ displayDrawer, listNotifications = [], handleDisplayDrawer, handleHideDrawer, markAsRead, setNotificationFilter, filter }) => {
+const Notifications = ({ displayDrawer, listNotifications = [], handleDisplayDrawer, handleHideDrawer, markAsRead, setNotificationFilter }) => {
   const menuItemClass = listNotifications.length > 0 ? css(styles.menuItem, styles.menuItemActive) : css(styles.menuItem);
 
   return (
@@ -109,7 +109,7 @@ const Notifications = ({ displayDrawer, listNotifications = [], handleDisplayDra
           </button>
           <p className={css(styles.notificationListItem)}>Here is the list of notifications</p>
           <div className={css(styles.buttonContainer)}>
-            <button data-test="urgent-button" className={css(styles.button)} onClick={() => setNotificationFilter('URGENT')}>‼️</button>
+            <button data-test="urgent-button" className={css(styles.button)} onClick={() => setNotificationFilter('URGENT')}>!!</button>
             <button data-test="default-button" className={css(styles.button)} onClick={() => setNotificationFilter('DEFAULT')}>?</button>
           </div>
           <ul className={css(styles.notificationList)}>
