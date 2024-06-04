@@ -13,6 +13,7 @@ describe('courseActionCreators', () => {
     fetchMock.resetMocks();
   });
 
+      // Run server for this test: npm run start
   it('creates FETCH_COURSE_SUCCESS when fetching courses has been done', () => {
     const courses = [
       { id: '1', name: 'ES6', credit: 60 },
@@ -34,7 +35,6 @@ describe('courseActionCreators', () => {
 
     const store = mockStore({ courses: [] });
 
-    // Use an absolute URL for the test
     const testUrl = 'http://localhost:8564/courses.json';
 
     return store.dispatch(fetchCourses(testUrl)).then(() => {
