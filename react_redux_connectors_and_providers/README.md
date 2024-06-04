@@ -1,4 +1,6 @@
-<p align="center">🌟 React Redux Connectors and Providers 🌟</p>
+# <p align="center">🌟 React Redux Connectors and Providers 🌟</p>
+
+![connector](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/ef639a57-f50a-4edf-a3c2-ae1e99e976da)
 
 ## 📝 Description
 
@@ -400,7 +402,7 @@ npm run test
 ```
 
 
-##💡 Use
+## 💡 Use
 
 - Example of use 1:
 
