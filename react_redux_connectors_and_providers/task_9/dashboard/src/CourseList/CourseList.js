@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     width: '90%',
     margin: 'auto',
     border: '1px solid rgb(194, 188, 188)',
-  },
+  }
 });
 
 class CourseList extends React.Component {
