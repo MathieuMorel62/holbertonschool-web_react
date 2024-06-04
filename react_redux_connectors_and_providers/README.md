@@ -401,6 +401,9 @@ npm start
 npm run test
 ```
 
+## 📸 Screenshot
+
+https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/c8589b2d-c42e-4de9-9f68-44fe38631d2b
 
 ## 💡 Use
 
