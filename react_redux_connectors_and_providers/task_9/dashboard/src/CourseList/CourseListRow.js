@@ -5,9 +5,11 @@ import { StyleSheet, css } from 'aphrodite';
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#deb5b545',
+    height: '40px',
   },
   row: {
     backgroundColor: '#f5f5f5ab',
+    height: '40px',
   },
   rowChecked: {
     backgroundColor: '#e6e4e4',
