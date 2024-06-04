@@ -405,7 +405,8 @@ npm run test
 
 https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/c8589b2d-c42e-4de9-9f68-44fe38631d2b
 
-<img width="49%" height="220px" alt="Capture d’écran 2024-06-04 à 16 32 03" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/2c5f6e81-f5ff-48a2-a374-896a2957ac4b"> <img width="49%" alt="Capture d’écran 2024-06-04 à 16 33 36" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/f4fdb38d-98bc-47a1-bdb1-fbbe9852437d">
+<img width="49%" alt="Capture d’écran 2024-06-04 à 16 43 17" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/e8347fac-edd5-4bc8-b02e-fe02f0c4df35"> <img width="49%" alt="Capture d’écran 2024-06-04 à 16 42 54" src="https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/df65996b-8705-4a7f-9e71-dca73a8bdbd6">
+
 
 
 ## 💡 Use
