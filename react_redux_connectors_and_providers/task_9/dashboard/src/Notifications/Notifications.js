@@ -62,9 +62,13 @@ const styles = StyleSheet.create({
   notificationList: {
     padding: 0,
     marginLeft: 10,
+    marginRight: 10,
     "@media (max-width: 900px)": { marginLeft: 0 }
   },
-  notificationListItem: { fontSize: "20px" },
+  notificationListItem: {
+    fontSize: "20px",
+    marginLeft: 10,
+  },
   buttonContainer: {
     marginTop: "10px",
     display: "flex",
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
     border: "none",
     backgroundColor: "#e11d3f",
     color: "white",
-    fontSize: "16px",
+    fontSize: "18px",
     borderRadius: "5px",
   }
 });
@@ -105,7 +109,7 @@ const Notifications = ({ displayDrawer, listNotifications = [], handleDisplayDra
             aria-label="Close"
             onClick={() => { handleHideDrawer(); }}
           >
-            <img src={closeIcon} alt="close button" style={{ width: "12px", height: "12px" }} />
+            <img src={closeIcon} alt="close button" style={{ width: "12px", height: "12px", margin: "10px" }} />
           </button>
           <p className={css(styles.notificationListItem)}>Here is the list of notifications</p>
           <div className={css(styles.buttonContainer)}>
