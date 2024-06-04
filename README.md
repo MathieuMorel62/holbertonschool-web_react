@@ -1,5 +1,7 @@
 # 🌟 Holberton School Web React 🌟
 
+![react-web](https://github.com/MathieuMorel62/holbertonschool-web_react/assets/113856302/324754c1-38df-41ce-b07e-82706bb60249)
+
 ## 📝 Description
 
 This repository is dedicated to learning and mastering React, an essential JavaScript library for the development of interactive and modern user interfaces. The project explores various fundamental aspects of React, including components, props, state and life cycle of the components.
