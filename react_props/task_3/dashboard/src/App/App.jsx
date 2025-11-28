@@ -20,7 +20,7 @@ function App() {
     {
       id: 3,
       type: 'urgent',
-      html: { __html: getLatestNotification() }
+      html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' }
     }
   ];
 
