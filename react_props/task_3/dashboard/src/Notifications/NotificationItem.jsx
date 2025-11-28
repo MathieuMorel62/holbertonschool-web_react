@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function NotificationItem({ type = 'default', html = null, value = '' }) {
+  let color = 'blue';
+  if (type === 'urgent') {
+    color = 'red';
+  }
+
   const styles = {
-    color: type === 'urgent' ? 'red' : 'blue'
+    color: color
   };
 
   if (html) {
