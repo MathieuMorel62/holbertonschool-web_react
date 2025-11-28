@@ -10,12 +10,12 @@ function App() {
     {
       id: 1,
       type: 'default',
-      value: 'New course available'
+      value: 'Notification available now'
     },
     {
       id: 2,
       type: 'urgent',
-      value: 'New resume available'
+      value: 'Notification available now'
     },
     {
       id: 3,
