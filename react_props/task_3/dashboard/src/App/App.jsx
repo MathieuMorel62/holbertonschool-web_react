@@ -1,40 +1,39 @@
-import './App.css'
+import React, { Fragment } from 'react';
+import './App.css';
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
-import { getLatestNotification } from "../utils/utils";
 
 function App() {
   const notificationsList = [
     {
       id: 1,
-      type: "default",
-      value: "New course available"
+      type: 'urgent',
+      value: 'Notification available now'
     },
     {
       id: 2,
-      type: "urgent",
-      value: "New resume available"
+      type: 'urgent',
+      value: 'Notification available now'
     },
     {
       id: 3,
-      type: "urgent",
-      value: getLatestNotification()
+      type: 'urgent',
+      html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' }
     }
   ];
 
   return (
-    <>
-      <Notifications notifications={notificationsList} />
-
+    <Fragment>
+      <div className="root-notifications">
+        <Notifications notifications={notificationsList} />
+      </div>
       <Header />
-
       <Login />
-
       <Footer />
-    </>
-  )
+    </Fragment>
+  );
 }
 
-export default App
+export default App;
