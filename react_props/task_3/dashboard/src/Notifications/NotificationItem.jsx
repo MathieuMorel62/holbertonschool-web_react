@@ -2,11 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function NotificationItem({ type, html, value }) {
-  // Cas 1 : Type 'default' -> couleur bleue
+  // Cas 1 : Notification par défaut (BLEU)
   if (type === 'default') {
+    // Si on a du HTML (optionnel, mais pour être sûr)
+    if (html) {
+      return (
+        <li
+          data-notification-type="default"
+          dangerouslySetInnerHTML={html}
+          style={{ color: 'blue' }}
+        />
+      );
+    }
+    // Cas classique
     return (
-      <li 
-        data-notification-type="default" 
+      <li
+        data-notification-type="default"
         style={{ color: 'blue' }}
       >
         {value}
@@ -14,21 +25,20 @@ function NotificationItem({ type, html, value }) {
     );
   }
 
-  // Cas 2 : HTML fourni -> couleur rouge (urgent implicite ou explicite)
+  // Cas 2 : Notification urgente (ROUGE) - Tous les autres types tombent ici si ce n'est pas 'default'
   if (html) {
     return (
-      <li 
-        data-notification-type="urgent" 
+      <li
+        data-notification-type="urgent"
         dangerouslySetInnerHTML={html}
         style={{ color: 'red' }}
       />
     );
   }
 
-  // Cas 3 : Type 'urgent' (ou autre) sans HTML -> couleur rouge
   return (
-    <li 
-      data-notification-type="urgent" 
+    <li
+      data-notification-type="urgent"
       style={{ color: 'red' }}
     >
       {value}
@@ -39,9 +49,9 @@ function NotificationItem({ type, html, value }) {
 NotificationItem.propTypes = {
   type: PropTypes.string.isRequired,
   html: PropTypes.shape({
-    __html: PropTypes.string
+    __html: PropTypes.string,
   }),
-  value: PropTypes.string
+  value: PropTypes.string,
 };
 
 NotificationItem.defaultProps = {
