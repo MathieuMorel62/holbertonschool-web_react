@@ -1,32 +1,47 @@
 import { render, screen } from '@testing-library/react';
 import NotificationItem from './NotificationItem';
-import { getLatestNotification } from '../utils/utils';
 
+describe('NotificationItem Component', () => {
+  test('renders li element with blue color and data-notification-type="default" when type is "default"', () => {
+    const { container } = render(
+      <NotificationItem type="default" value="Test notification" />
+    );
+    
+    const liElement = container.querySelector('li');
+    
+    expect(liElement).toHaveStyle({ color: 'rgb(0, 0, 255)' });
+    
+    expect(liElement).toHaveAttribute('data-notification-type', 'default');
+  });
 
-test('it should display the correct notification with a red color, and set the "data-notification-type" to urgent whenever it receives the type "urgent" props', () => {
-  const props = {
-    type: 'urgent',
-    html: {__html: getLatestNotification()},
-  }
+  test('renders li element with red color and data-notification-type="urgent" when type is "urgent"', () => {
+    const { container } = render(
+      <NotificationItem type="urgent" value="Urgent notification" />
+    );
+    
+    const liElement = container.querySelector('li');
+    
+    expect(liElement).toHaveStyle({ color: 'rgb(255, 0, 0)' });
+    
+    expect(liElement).toHaveAttribute('data-notification-type', 'urgent');
+  });
 
-  render(<NotificationItem {...props} />);
+  test('renders value text correctly', () => {
+    render(
+      <NotificationItem type="default" value="Test notification text" />
+    );
+    
+    const notification = screen.getByText('Test notification text');
+    expect(notification).toBeInTheDocument();
+  });
 
-  const liElement = screen.getByRole('listitem');
-
-  expect(liElement).toHaveStyle({ color: 'red' });
-  expect(liElement).toHaveAttribute('data-notification-type', 'urgent');
-});
-
-test('it should display the correct notification with a blue color, and set the "data-notification-type" to default whenever it receives the type "default" props', () => {
-  const props = {
-    type: 'default',
-    html: undefined,
-  }
-
-  render(<NotificationItem {...props} />);
-
-  const liElement = screen.getByRole('listitem');
-
-  expect(liElement).toHaveStyle({ color: 'blue' });
-  expect(liElement).toHaveAttribute('data-notification-type', 'default');
+  test('renders HTML content correctly when html prop is provided', () => {
+    const htmlContent = { __html: '<strong>Urgent requirement</strong> - complete by EOD' };
+    const { container } = render(
+      <NotificationItem type="urgent" html={htmlContent} />
+    );
+    
+    const liElement = container.querySelector('li');
+    expect(liElement.innerHTML).toBe('<strong>Urgent requirement</strong> - complete by EOD');
+  });
 });
