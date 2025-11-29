@@ -1,39 +1,32 @@
-import React from "react";
-import "./Notifications.css";
-import NotificationItem from "./NotificationItem";
-import closeIcon from "../assets/close-icon.png";
+import './Notifications.css';
 
-import { getLatestNotification } from "../utils/utils";
+import closeIcon from '../assets/close-button.png';
+import NotificationItem from './NotificationItem';
 
-function Notifications() {
+export default function Notifications({ notifications = [] }) {
   return (
-    <div className="Notifications">
-      <button
-        style={{
-          position: "absolute",
-          top: "20px",
-          right: "20px",
-          border: "none",
-          background: "transparent",
-          cursor: "pointer",
-        }}
-        aria-label="Close"
-        onClick={() => console.log("Close button has been clicked")}
-      >
-        <img
-          src={closeIcon}
-          alt="close button"
-          style={{ width: "12px", height: "12px" }}
-        />
-      </button>
+    <div className='notification-items'>
       <p>Here is the list of notifications</p>
       <ul>
-        <NotificationItem type="default" value="New course available" />
-        <NotificationItem type="urgent" value="New resume available" />
-        <NotificationItem type="urgent" html={{ __html: getLatestNotification() }}></NotificationItem>
+        {notifications.map((notification) => (
+          <NotificationItem
+            key={notification.id}
+            type={notification.type}
+            value={notification.value}
+            html={notification.html}
+          />
+        ))}
       </ul>
+      <button
+        aria-label='Close'
+        type='button'
+        onClick={() => console.log('Close button has been clicked')}
+      >
+        <img
+          alt='close-icon'
+          src={closeIcon}
+        />
+      </button>
     </div>
   );
 }
-
-export default Notifications;
