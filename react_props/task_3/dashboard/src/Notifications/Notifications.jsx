@@ -1,61 +1,39 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './Notifications.css';
-import closeIcon from '../assets/close-button.png';
-import { getLatestNotification } from '../utils/utils';
-import NotificationItem from './NotificationItem';
+import React from "react";
+import "./Notifications.css";
+import NotificationItem from "./NotificationItem";
+import closeIcon from "../assets/close-icon.png";
 
-function Notifications({ notifications = [] }) {
-  const handleClose = () => {
-    console.log('Close button has been clicked');
-  };
+import { getLatestNotification } from "../utils/utils";
 
+function Notifications() {
   return (
-    <div className="notification-items">
+    <div className="Notifications">
       <button
         style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          background: 'transparent',
-          border: 'none',
-          cursor: 'pointer'
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          border: "none",
+          background: "transparent",
+          cursor: "pointer",
         }}
         aria-label="Close"
-        onClick={handleClose}
+        onClick={() => console.log("Close button has been clicked")}
       >
-        <img src={closeIcon} alt="close icon" style={{ width: '15px', height: '15px' }} />
+        <img
+          src={closeIcon}
+          alt="close button"
+          style={{ width: "12px", height: "12px" }}
+        />
       </button>
       <p>Here is the list of notifications</p>
       <ul>
-        {notifications.map((notification) => (
-          <NotificationItem
-            key={notification.id}
-            type={notification.type}
-            value={notification.value}
-            html={notification.html}
-          />
-        ))}
+        <NotificationItem type="default" value="New course available" />
+        <NotificationItem type="urgent" value="New resume available" />
+        <NotificationItem type="urgent" html={{ __html: getLatestNotification() }}></NotificationItem>
       </ul>
     </div>
   );
 }
-
-Notifications.propTypes = {
-  notifications: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      type: PropTypes.string,
-      value: PropTypes.string,
-      html: PropTypes.shape({
-        __html: PropTypes.string
-      })
-    })
-  )
-};
-
-Notifications.defaultProps = {
-  notifications: []
-};
 
 export default Notifications;

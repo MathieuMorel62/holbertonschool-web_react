@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function NotificationItem({ type = 'default', html, value }) {
+function NotificationItem({ type = 'default', html = null, value = '' }) {
+  const styles = {
+    color: type === 'urgent' ? 'red' : 'blue'
+  };
+
   if (html) {
     return (
       <li
         data-notification-type={type}
+        style={styles}
         dangerouslySetInnerHTML={html}
-        style={{ color: type === 'urgent' ? 'red' : 'blue' }}
       />
     );
   }
@@ -15,7 +19,7 @@ function NotificationItem({ type = 'default', html, value }) {
   return (
     <li
       data-notification-type={type}
-      style={{ color: type === 'urgent' ? 'red' : 'blue' }}
+      style={styles}
     >
       {value}
     </li>
@@ -23,7 +27,7 @@ function NotificationItem({ type = 'default', html, value }) {
 }
 
 NotificationItem.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   html: PropTypes.shape({
     __html: PropTypes.string
   }),
@@ -31,7 +35,9 @@ NotificationItem.propTypes = {
 };
 
 NotificationItem.defaultProps = {
-  type: 'default'
+  type: 'default',
+  html: null,
+  value: ''
 };
 
 export default NotificationItem;
