@@ -18,6 +18,15 @@ function CourseListRow({ isHeader = false, textFirstCell, textSecondCell = null 
     );
   }
 
+  if (textSecondCell === null) {
+    return (
+      <tr>
+        <td colSpan="2" className="no-course-message">{textFirstCell}</td>
+        <td colSpan="2" className="no-course-message">{textFirstCell}</td>
+      </tr>
+    );
+  }
+
   return (
     <tr>
       <td>{textFirstCell}</td>
