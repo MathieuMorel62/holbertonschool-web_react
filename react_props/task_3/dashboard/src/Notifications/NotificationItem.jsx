@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function NotificationItem({ type = 'default', html = null, value = '' }) {
   const styles = {
-    color: type === 'urgent' ? 'rgb(255, 0, 0)' : 'rgb(0, 0, 255)'
+    color: type === 'urgent' ? 'red' : 'blue'
   };
 
   if (html) {
