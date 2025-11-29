@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function NotificationItem({ type, html, value }) {
-  // On gère le cas "default"
+  // Cas 1 : Type 'default' -> couleur bleue
   if (type === 'default') {
     return (
       <li 
-        data-notification-type={type} 
+        data-notification-type="default" 
         style={{ color: 'blue' }}
       >
         {value}
@@ -14,21 +14,21 @@ function NotificationItem({ type, html, value }) {
     );
   }
 
-  // On gère le cas "urgent" avec HTML
+  // Cas 2 : HTML fourni -> couleur rouge (urgent implicite ou explicite)
   if (html) {
     return (
       <li 
-        data-notification-type={type} 
-        dangerouslySetInnerHTML={html} 
+        data-notification-type="urgent" 
+        dangerouslySetInnerHTML={html}
         style={{ color: 'red' }}
       />
     );
   }
 
-  // Tous les autres cas (urgent sans html, etc)
+  // Cas 3 : Type 'urgent' (ou autre) sans HTML -> couleur rouge
   return (
     <li 
-      data-notification-type={type} 
+      data-notification-type="urgent" 
       style={{ color: 'red' }}
     >
       {value}
@@ -37,16 +37,15 @@ function NotificationItem({ type, html, value }) {
 }
 
 NotificationItem.propTypes = {
-  html: PropTypes.shape({
-    __html: PropTypes.string,
-  }),
   type: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  html: PropTypes.shape({
+    __html: PropTypes.string
+  }),
+  value: PropTypes.string
 };
 
-// C'EST ICI QUE SE JOUE LA VALIDATION :
 NotificationItem.defaultProps = {
-  type: 'default', // Par défaut, on force le type à 'default' (bleu)
+  type: 'default',
 };
 
 export default NotificationItem;
