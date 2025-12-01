@@ -1,40 +1,34 @@
-import './Notifications.css';
-import React from 'react';
-import closeIcon from '../assets/close-button.png';
-import { getLatestNotification } from '../utils/utils';
+import './Notifications.css'
+import closeButton from '../assets/close-button.png'
+import { getLatestNotification } from '../utils/utils'
 
 function Notifications() {
-  const handleClose = () => {
-    console.log('Close button has been clicked');
-  };
-
-  return (
-    <div className="notification-items">
-      <button
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          background: 'transparent',
-          border: 'none',
-          cursor: 'pointer'
-        }}
-        aria-label="Close"
-        onClick={handleClose}
-      >
-        <img src={closeIcon} alt="close icon" style={{ width: '15px', height: '15px' }} />
-      </button>
-      <p>Here is the list of notifications</p>
-      <ul>
-        <li data-priority="default">New course available</li>
-        <li data-priority="urgent">New resume available</li>
-        <li
-          data-priority="urgent"
-          dangerouslySetInnerHTML={{ __html: getLatestNotification() }}
-        ></li>
-      </ul>
-    </div>
-  );
+    const latestNotification = { __html: getLatestNotification() }
+    return (
+        <>
+            <div className="notification-items">
+                <p>Here is the list of notifications</p>
+                <ul>
+                    <li data-priority="default">New course available</li>
+                    <li data-priority="urgent">New resume available</li>
+                    <li data-priority="urgent" dangerouslySetInnerHTML={latestNotification}></li>
+                </ul>
+                <button style={{
+                    position: 'absolute',
+                    top: '2px',
+                    right: '2px',
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#343434',
+                    cursor: 'pointer',
+                    }}
+                    onClick={() => console.log("Close button has been clicked")}
+                    aria-label='Close'>
+                    <img src={closeButton} alt="close-button" />
+                </button>
+            </div>
+        </>
+    )
 }
 
-export default Notifications;
+export default Notifications

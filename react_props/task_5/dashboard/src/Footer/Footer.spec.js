@@ -1,26 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import { getCurrentYear, getFooterCopy } from '../utils/utils';
-import Footer from './Footer';
+import { render, screen } from '@testing-library/react'
+import Footer from './Footer'
+import { getFooterCopy, getCurrentYear } from '../utils/utils'
 
-describe('Footer Component', () => {
-  test('renders without crashing', () => {
-    render(<Footer />);
-    const currentYear = new Date().getFullYear();
-    const copyrightText = screen.getByText(
-      new RegExp(`copyright ${currentYear}`, 'i')
-    );
-    expect(copyrightText).toBeInTheDocument();
-  });
+test('renders a p element string Copyright {the current year} - Holberton School, whenever the getFooterCopy() “isIndex” argument is set to true', () => {
+    render(<Footer isIndex={true}/>)
 
-  test('p element renders the expected string', () => {
-    render(<Footer />);
-    const currentYear = getCurrentYear();
-    const footerText = getFooterCopy(true);
-    
-    const paragraphElement = screen.getByText(
-      `Copyright ${currentYear} - ${footerText}`
-    );
-    
-    expect(paragraphElement).toBeInTheDocument();
-  });
-});
+    const currentYear = getCurrentYear()
+    const footerCopy = getFooterCopy(true)
+    expect(screen.getByText(new RegExp(`copyright ${currentYear} - ${footerCopy}`, 'i'))).toBeInTheDocument()
+})

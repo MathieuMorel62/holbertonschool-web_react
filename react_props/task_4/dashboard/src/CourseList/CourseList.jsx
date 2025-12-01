@@ -1,47 +1,35 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import CourseListRow from './CourseListRow';
-import './CourseList.css';
+import './CourseList.css'
+import CourseListRow from "./CourseListRow";
 
-function CourseList({ courses = [] }) {
-  return (
-    <table id="CourseList">
-      {courses.length > 0 && (
-        <thead>
-          <CourseListRow textFirstCell="Available courses" isHeader={true} />
-          <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true} />
-        </thead>
-      )}
-      <tbody>
-        {courses.length === 0 ? (
-          <CourseListRow textFirstCell="No course available yet" isHeader={false} />
-        ) : (
-          courses.map((course) => (
-            <CourseListRow
-              key={course.id}
-              textFirstCell={course.name}
-              textSecondCell={course.credit}
-              isHeader={false}
-            />
-          ))
-        )}
-      </tbody>
-    </table>
-  );
+function CourseList({courses = []}) {
+    if (courses.length === 0) {
+        return (
+            <table id="CourseList">
+                <thead>
+                    <CourseListRow textFirstCell="No course available yet" isHeader={true} />
+                </thead>
+            </table>
+        )
+    } else {
+        return (
+            <table id="CourseList">
+                <thead>
+                <CourseListRow textFirstCell="Available courses" isHeader={true}/>
+                <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true}/>
+                </thead>
+                <tbody>
+                    {courses.map((course) => (
+                        <CourseListRow 
+                            key={course.id}
+                            textFirstCell={course.name}
+                            textSecondCell={course.credit}
+                            isHeader={false}
+                        />
+                    ))}
+                </tbody>
+            </table>
+        )
+    }
 }
 
-CourseList.propTypes = {
-  courses: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      credit: PropTypes.number.isRequired
-    })
-  )
-};
-
-CourseList.defaultProps = {
-  courses: []
-};
-
-export default CourseList;
+export default CourseList

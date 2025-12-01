@@ -1,73 +1,46 @@
-import React, { Fragment } from 'react';
-import './App.css';
-import Notifications from '../Notifications/Notifications';
-import CourseList from '../CourseList/CourseList';
-import Header from '../Header/Header';
-import Login from '../Login/Login';
-import Footer from '../Footer/Footer';
-import PropTypes from 'prop-types';
+import './App.css'
+import Notifications from '../Notifications/Notifications'
+import Header from '../Header/Header'
+import Login from '../Login/Login'
+import Footer from '../Footer/Footer'
+import CourseList from '../CourseList/CourseList'
+import { getLatestNotification } from '../utils/utils'
 
 function App({ isLoggedIn = false }) {
   const notificationsList = [
-    {
-      id: 1,
-      type: 'default',
-      value: 'Notification available now'
-    },
-    {
-      id: 2,
-      type: 'urgent',
-      value: 'Notification available now'
-    },
-    {
-      id: 3,
-      type: 'urgent',
-      html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' }
-    }
-  ];
-
+    {id: 1, type: "default", value: "New course available"},
+    {id: 2, type: "urgent", value: "New resume available"},
+    {id: 3, type: "urgent", html: { __html: getLatestNotification() }},
+  ]
   const coursesList = [
-    { 
-      id: 1,
-      name: 'ES6',
-      credit: 60
-    },
-    { 
-      id: 2,
-      name: 'Webpack',
-      credit: 20
-    },
-    { 
-      id: 3,
-      name: 'React',
-      credit: 40
-    }
-  ];
+    {id: 1, name: "ES6", credit: 60},
+    {id: 2, name: "Webpack", credit: 20},
+    {id: 3, name: "React", credit: 40}
+  ]
 
   return (
-    <Fragment>
+    <>
       <div className="root-notifications">
-        <Notifications notifications={notificationsList} />
+        <Notifications notifications={notificationsList}/>
       </div>
-      <Header />
-      <div className="App-body">
-        {isLoggedIn ? (
-          <CourseList courses={coursesList} />
+      <div className="root-header">
+        <Header />
+      </div>
+      {isLoggedIn ? (
+        <div className="root-courses">
+          <CourseList courses={coursesList}/>
+        </div>    
         ) : (
-          <Login />
-        )}
+          <div className="root-login">
+            <Login />
+          </div>
+        )
+      }
+      <div className="root-footer">
+        <Footer />
       </div>
-      <Footer />
-    </Fragment>
-  );
+    </>
+  )
 }
 
-App.propTypes = {
-  isLoggedIn: PropTypes.bool
-};
-
-App.defaultProps = {
-  isLoggedIn: false
-};
-
-export default App;
+export default App

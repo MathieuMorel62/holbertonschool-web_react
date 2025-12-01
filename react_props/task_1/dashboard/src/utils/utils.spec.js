@@ -1,20 +1,18 @@
-import { getCurrentYear, getFooterCopy, getLatestNotification } from './utils';
+import {expect, test} from '@jest/globals';
+import { getCurrentYear, getFooterCopy, getLatestNotification } from './utils'
 
-describe('Utils functions', () => {
-  test('getCurrentYear returns the correct year', () => {
-    const currentYear = new Date().getFullYear();
-    expect(getCurrentYear()).toBe(currentYear);
-  });
+test('the current year value', () => {
+    const currentYear = new Date().getFullYear()
+    expect(getCurrentYear()).toBe(currentYear)
+})
 
-  test('getFooterCopy returns "Holberton School" when argument is true', () => {
-    expect(getFooterCopy(true)).toBe('Holberton School');
-  });
+test('the return value of getFooterCopy depending on the boolean parameter', () => {
+    const isIndexFalse = getFooterCopy(false)
+    expect(isIndexFalse).toBe("Holberton School main dashboard")
+    const isIndexTrue = getFooterCopy(true)
+    expect(isIndexTrue).toBe("Holberton School")
+})
 
-  test('getFooterCopy returns "Holberton School" when argument is false', () => {
-    expect(getFooterCopy(false)).toBe('Holberton School');
-  });
-
-  test('getLatestNotification returns the correct string', () => {
-    expect(getLatestNotification()).toBe('<strong>Urgent requirement</strong> - complete by EOD');
-  });
-});
+test('the return string from getLatestNotification', () => {
+    expect(getLatestNotification()).toBe("<strong>Urgent requirement</strong> - complete by EOD")
+})

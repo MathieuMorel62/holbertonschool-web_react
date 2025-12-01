@@ -1,66 +1,66 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import Notifications from './Notifications';
+import { render, screen, fireEvent } from '@testing-library/react'
+import Notifications from './Notifications'
+import { getLatestNotification } from '../utils/utils'
 
-describe('Notifications Component', () => {
-  const sampleNotifications = [
-    { id: 1, type: 'default', value: 'New course available' },
-    { id: 2, type: 'urgent', value: 'New resume available' },
-    { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
-  ];
+test('Renders the notifications title', () => {
+    const notificationsList = [
+        { id: 1, type: "default", value: "New course available" },
+        { id: 2, type: "urgent", value: "New resume available" },
+        { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
+    ]
+    render(<Notifications notifications={notificationsList} displayDrawer={true}/>)
+    expect(screen.getByText(/^here is the list of notifications$/i)).toBeInTheDocument()
+})
 
-  test('always renders the notification title', () => {
-    render(<Notifications notifications={sampleNotifications} />);
-    expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
-  });
+test('Renders a button in the notifications', () => {
+    render(<Notifications displayDrawer={true}/>)
+    expect(screen.getByRole('button', { name: /^close$/i})).toBeInTheDocument()
+})
 
-  test('hides drawer content when displayDrawer is false', () => {
-    render(<Notifications notifications={sampleNotifications} displayDrawer={false} />);
+test('Renders exactly 3 li elements', () => {
+    const notificationsList = [
+        { id: 1, type: "default", value: "New course available" },
+        { id: 2, type: "urgent", value: "New resume available" },
+        { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
+    ]
+    
+    render(<Notifications notifications={notificationsList} displayDrawer={true}/>)
+    expect(screen.getAllByRole('listitem').length).toBe(3)
+})
 
-    expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /close/i })).not.toBeInTheDocument();
-    expect(screen.queryByText(/here is the list of notifications/i)).not.toBeInTheDocument();
-    expect(screen.queryAllByRole('listitem')).toHaveLength(0);
-  });
+test('Clicking the close button logs Close button has been clicked to the console', () => {
+    render(<Notifications displayDrawer={true}/>)
+    console.log = jest.fn()
+    fireEvent.click(screen.getByRole('button', { name: /^close$/i}))
+    expect(console.log).toHaveBeenCalledWith(expect.stringMatching(/^close button has been clicked$/i))
+})
 
-  test('shows drawer content when displayDrawer is true', () => {
-    render(<Notifications notifications={sampleNotifications} displayDrawer={true} />);
+test('Only renders the notification-title when displayDrawer is false', () => {
+    render(<Notifications displayDrawer={false} />)
+    expect(screen.getByText(/your notifications/i)).toBeInTheDocument()
 
-    expect(screen.getByRole('button', { name: /close/i })).toBeInTheDocument();
-    expect(screen.getByText(/here is the list of notifications/i)).toBeInTheDocument();
+    expect(screen.queryByText(/^here is the list of notifications$/i)).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /^close$/i})).not.toBeInTheDocument()
+})
 
-    const listItems = screen.getAllByRole('listitem');
-    expect(listItems).toHaveLength(sampleNotifications.length);
-    expect(screen.getByText('New course available')).toBeInTheDocument();
-    expect(screen.getByText('New resume available')).toBeInTheDocument();
-    expect(screen.getByText(/urgent requirement/i)).toBeInTheDocument();
-  });
+test('Renders p element, button and notifications item when displayDrawer is true', () => {
+    const notificationsList = [
+        { id: 1, type: "default", value: "New course available" },
+        { id: 2, type: "urgent", value: "New resume available" },
+        { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
+    ]
+    render(<Notifications notifications={notificationsList} displayDrawer={true} />)
 
-  test('logs to console when clicking close button while drawer visible', () => {
-    const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+    expect(screen.getByText(/^here is the list of notifications$/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^close$/i})).toBeInTheDocument()
+    expect(screen.getAllByRole('listitem').length).toBe(3)
+})
 
-    render(<Notifications notifications={sampleNotifications} displayDrawer={true} />);
-    const closeButton = screen.getByRole('button', { name: /close/i });
+test('Renders p element, button and notifications item when displayDrawer is true', () => {
+    const notificationsList = []
+    render(<Notifications notifications={notificationsList} displayDrawer={true} />)
 
-    fireEvent.click(closeButton);
-
-    expect(consoleSpy).toHaveBeenCalledWith('Close button has been clicked');
-
-    consoleSpy.mockRestore();
-  });
-
-  test('renders fallback text when drawer open but there are no notifications', () => {
-    render(<Notifications notifications={[]} displayDrawer={true} />);
-
-    expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
-    expect(screen.getByText(/no new notification for now/i)).toBeInTheDocument();
-    expect(screen.queryByText(/here is the list of notifications/i)).not.toBeInTheDocument();
-    expect(screen.queryAllByRole('listitem')).toHaveLength(0);
-  });
-
-  test('renders fallback text when notifications prop omitted but drawer open', () => {
-    render(<Notifications displayDrawer={true} />);
-
-    expect(screen.getByText(/your notifications/i)).toBeInTheDocument();
-    expect(screen.getByText(/no new notification for now/i)).toBeInTheDocument();
-  });
-});
+    expect(screen.queryByText(/^here is the list of notifications$/i)).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^close$/i})).toBeInTheDocument()
+    expect(screen.getByText(/^no new notification for now$/i)).toBeInTheDocument()
+})

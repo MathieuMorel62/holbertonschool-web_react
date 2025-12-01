@@ -1,60 +1,38 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './Notifications.css';
-import closeIcon from '../assets/close-button.png';
-import NotificationItem from './NotificationItem';
+import './Notifications.css'
+import NotificationItem from './NotificationItem'
+import closeButton from '../assets/close-button.png'
 
-function Notifications({ notifications = [] }) {
-  const handleClose = () => {
-    console.log('Close button has been clicked');
-  };
-
-  return (
-    <div className="notification-items">
-      <button
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          background: 'transparent',
-          border: 'none',
-          cursor: 'pointer'
-        }}
-        aria-label="Close"
-        onClick={handleClose}
-      >
-        <img src={closeIcon} alt="close icon" style={{ width: '15px', height: '15px' }} />
-      </button>
-      <p>Here is the list of notifications</p>
-      <ul>
-        {notifications.map((notification) => (
-          <NotificationItem
-            key={notification.id}
-            type={notification.type}
-            value={notification.value}
-            html={notification.html}
-          />
-        ))}
-      </ul>
-    </div>
-  );
+function Notifications({ notifications = []}) {
+    return (
+        <>
+            <div className="notification-items">
+                <p>Here is the list of notifications</p>
+                <ul>
+                    {notifications.map((notification) => (
+                        <NotificationItem 
+                            key={notification.id}
+                            type={notification.type}
+                            value={notification.value}
+                            html={notification.html} 
+                        />
+                    ))}
+                </ul>
+                <button style={{
+                    position: 'absolute',
+                    top: '2px',
+                    right: '2px',
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#343434',
+                    cursor: 'pointer',
+                    }}
+                    onClick={() => console.log("Close button has been clicked")}
+                    aria-label='Close'>
+                    <img src={closeButton} alt="close-button" />
+                </button>
+            </div>
+        </>
+    )
 }
 
-Notifications.propTypes = {
-  notifications: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      type: PropTypes.string,
-      value: PropTypes.string,
-      html: PropTypes.shape({
-        __html: PropTypes.string
-      })
-    })
-  )
-};
-
-Notifications.defaultProps = {
-  notifications: []
-};
-
-export default Notifications;
+export default Notifications
