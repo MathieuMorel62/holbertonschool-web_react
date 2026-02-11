@@ -1,13 +1,14 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App/App.jsx';
-import './main.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App/App';
+import reportWebVitals from './reportWebVitals';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App  isLoggedIn={true}/>
-  </StrictMode>,
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
+
+reportWebVitals();
