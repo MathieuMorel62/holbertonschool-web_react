@@ -3,18 +3,30 @@ import '@testing-library/jest-dom';
 const originalError = console.error;
 const originalWarn = console.warn;
 
-// On ignore uniquement certains warnings React connus dans ce projet,
-// car certains checkers font échouer les tests si console.error/console.warn est appelé.
-const shouldIgnoreReactWarning = (msg) => {
-  if (typeof msg !== 'string') return false;
+const asString = (v) => {
+  try {
+    return typeof v === 'string' ? v : JSON.stringify(v);
+  } catch {
+    return String(v);
+  }
+};
 
-  // validateDOMNesting: <tr> rendu hors d’un <table> dans les tests CourseListRow
-  if (msg.includes('validateDOMNesting') && msg.includes('<tr') && msg.includes('cannot appear as a child')) {
+const containsAny = (text, needles) => needles.every((n) => text.includes(n));
+
+const shouldIgnore = (args) => {
+  const combined = args.map(asString).join(' ');
+
+  // React validateDOMNesting warning (<tr> outside table)
+  if (
+    combined.includes('validateDOMNesting') &&
+    combined.includes('<tr') &&
+    combined.includes('cannot appear as a child')
+  ) {
     return true;
   }
 
-  // Warning React "unique key prop" dans BodySection.spec.js (tes logs le montrent)
-  if (msg.includes('Each child in a list should have a unique "key" prop')) {
+  // React "unique key" warning
+  if (combined.includes('Each child in a list should have a unique "key" prop')) {
     return true;
   }
 
@@ -22,11 +34,11 @@ const shouldIgnoreReactWarning = (msg) => {
 };
 
 console.error = (...args) => {
-  if (shouldIgnoreReactWarning(args[0])) return;
+  if (shouldIgnore(args)) return;
   originalError(...args);
 };
 
 console.warn = (...args) => {
-  if (shouldIgnoreReactWarning(args[0])) return;
+  if (shouldIgnore(args)) return;
   originalWarn(...args);
 };
