@@ -5,33 +5,38 @@ function CourseList({ courses = [] }) {
   return (
     <div className="courses-container w-4/5 mx-auto">
       <table id="coursesTable" className="w-full border-collapse">
-        <thead>
-          <CourseListRow textFirstCell="Available courses" isHeader={true} />
-          <CourseListRow
-            textFirstCell="Course name"
-            textSecondCell="Credit"
-            isHeader={true}
-          />
-        </thead>
-
-        <tbody>
-          {courses.length === 0 ? (
+        {courses.length === 0 ? (
+          <thead>
             <CourseListRow
               textFirstCell="No course available yet"
-              isHeader={false}
-              textSecondCell={null}
+              isHeader={true}
             />
-          ) : (
-            courses.map((course) => (
+          </thead>
+        ) : (
+          <>
+            <thead>
               <CourseListRow
-                key={course.id}
-                textFirstCell={course.name}
-                textSecondCell={course.credit}
-                isHeader={false}
+                textFirstCell="Available courses"
+                isHeader={true}
               />
-            ))
-          )}
-        </tbody>
+              <CourseListRow
+                textFirstCell="Course name"
+                textSecondCell="Credit"
+                isHeader={true}
+              />
+            </thead>
+            <tbody>
+              {courses.map((course) => (
+                <CourseListRow
+                  key={course.id}
+                  textFirstCell={course.name}
+                  textSecondCell={course.credit}
+                  isHeader={false}
+                />
+              ))}
+            </tbody>
+          </>
+        )}
       </table>
     </div>
   );
