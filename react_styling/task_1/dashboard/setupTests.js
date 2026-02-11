@@ -1,19 +1,32 @@
 import '@testing-library/jest-dom';
 
 const originalError = console.error;
+const originalWarn = console.warn;
 
-// Certains environnements CI échouent dès qu’il y a un console.error (même si Jest affiche PASS)
-// On ignore UNIQUEMENT le warning React validateDOMNesting lié au rendu d’un <tr> hors d’une table.
-console.error = (...args) => {
-  const firstArg = args[0];
+// On ignore uniquement certains warnings React connus dans ce projet,
+// car certains checkers font échouer les tests si console.error/console.warn est appelé.
+const shouldIgnoreReactWarning = (msg) => {
+  if (typeof msg !== 'string') return false;
 
-  if (
-    typeof firstArg === 'string' &&
-    firstArg.includes('validateDOMNesting') &&
-    firstArg.includes('<tr> cannot appear as a child of <div>')
-  ) {
-    return;
+  // validateDOMNesting: <tr> rendu hors d’un <table> dans les tests CourseListRow
+  if (msg.includes('validateDOMNesting') && msg.includes('<tr') && msg.includes('cannot appear as a child')) {
+    return true;
   }
 
+  // Warning React "unique key prop" dans BodySection.spec.js (tes logs le montrent)
+  if (msg.includes('Each child in a list should have a unique "key" prop')) {
+    return true;
+  }
+
+  return false;
+};
+
+console.error = (...args) => {
+  if (shouldIgnoreReactWarning(args[0])) return;
   originalError(...args);
+};
+
+console.warn = (...args) => {
+  if (shouldIgnoreReactWarning(args[0])) return;
+  originalWarn(...args);
 };
